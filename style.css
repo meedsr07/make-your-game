@@ -1,0 +1,31 @@
+body {
+	background-color: black;
+  	min-height: 100vh;	 
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#container {
+	width: 150px;
+	position: relative;
+	height: 112px;
+	border: solid;
+	border-width:1px;
+	border-color : white;
+}
+
+.alien {
+	position: absolute;
+	background-image: url("out/inv_c_1.png");
+    background-repeat: no-repeat;
+	image-rendering: crisp-edges;
+	width: 6px;
+	height: 6px;
+}
+#mob1 {
+	position: absolute;
+	background-image: url("out/inv_c_2.png");
+    background-repeat: no-repeat;
+	image-rendering: crisp-edges;
+}
