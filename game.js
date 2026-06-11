@@ -1,30 +1,19 @@
-
-
-export function updateColors(mobs =  [], missiles = []) {
-		for (let mob of mobs) {
-				mob.element.classList.remove(mob.col)
-				mob.col = layers[Math.round(mob.y/85)]
-				mob.element.classList.add(mob.col)
-		}
-		for (let shot of shots) {
-				shot.element.classList.remove(shot.col)
-				shot.col = layers[Math.round(y/85)]
-				shot.element.classList.add(shot.col)
-		}
-}
+import {gamePlay as G}  from "./state.js"
 
 
 
 
 
-export  default function movMobs(mobs, direction, layers ) {
-		let xOffset = (10* direction) 
+
+
+export  default function movMobs() {
+		let xOffset = (10* G.direction) 
 		let yOffset = 40
 		let swip = false	
 		// TO DO HANDLING WHEN IT touch shilds or ground
-		for (let row of mobs) {
+		for (let row of G.spawnedMobs) {
 			let rowCopy = row
-			if (direction > 0) {
+			if (G.direction > 0) {
 				rowCopy = [...row].reverse() 
 			}
 		
@@ -58,12 +47,12 @@ export  default function movMobs(mobs, direction, layers ) {
 		
 		}
 		if (swip) {
-				if (direction === 1) {
-					direction = -1 
+				if (G.direction === 1) {
+					G.direction = -1 
 				} else {
-					direction = 1
+					G.direction = 1
 				}
-			mobs = mobs.reverse()
+			let mobs = [...G.spawnedMobs].reverse()
 			for (let row of mobs) {
 			
 			for (let mob of row) {
@@ -88,7 +77,7 @@ export  default function movMobs(mobs, direction, layers ) {
 				mob.y += yOffset 
 				mob.element.style.transform = `translate(${mob.x}px, ${mob.y}px)`
 				mob.element.classList.remove(mob.col)
-				mob.col = layers[Math.round(mob.y/85)]
+				mob.col = G.layers[Math.round(mob.y/85)]
 				mob.element.classList.add(mob.col)
 
 			}
@@ -98,5 +87,4 @@ export  default function movMobs(mobs, direction, layers ) {
 
 		}
 		 
-		return direction	
 }

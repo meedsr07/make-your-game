@@ -1,11 +1,7 @@
 import movMobs from "./game.js"
+import { gamePlay as G } from "./state.js"
 
 
-const layers = ["violet",  "green", "cyan", "violet", "yellow", "red", "cyan"]
-
-const mobs = ["squid", "crab", "octpus"]
-
-const spawnedMobs = [ ]
 
 
 
@@ -16,7 +12,7 @@ function createMob(name, x, y) {
 		div.style.left = x+"px"
 		div.classList.add(name)
 		console.log(y/85)
-		let col = layers[Math.round(y/85)]
+		let col = G.layers[Math.round(y/85)]
 		div.classList.add(col) 
 		
 		div.classList.add(name+"_1") 
@@ -60,7 +56,7 @@ function spawnMobs(container) {
 	let initY = 85
 	let line = 0
 	let fragment = 	document.createDocumentFragment()
-	for (let i = 0; i < mobs.length ; i++ ) {
+	for (let i = 0; i < G.mobs.length ; i++ ) {
 			let j = 2
 			if (i === 0) {
 				j = 1  
@@ -69,16 +65,15 @@ function spawnMobs(container) {
 			let row = []
 			for (let m = 0; m < 11; m++) {
 
-				let mob = createMob(mobs[i], initX+(m * (40)), initY+(line * (40)  )) 
+				let mob = createMob(G.mobs[i], initX+(m * (40)), initY+(line * (40)  )) 
 				row.push(mob)
 				fragment.appendChild(mob.element)
 
 			}		
-			spawnedMobs.push(row)
+			G.spawnedMobs.push(row)
 
 			line++
 			container.appendChild(fragment) 	
-			console.log(mobs[i])
 			fragment = 	document.createDocumentFragment()
 		} 
 			
@@ -94,7 +89,7 @@ async function loop() {
 	while (true) {
 		await sleep(300)
 		console.log("called")
-		direction =  movMobs(spawnedMobs, direction, layers) 
+		movMobs() 
 	}
 }
 
