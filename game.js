@@ -4,9 +4,28 @@ import {gamePlay as G}  from "./state.js"
 
 
 
+export  function shout() {
+ 	let rev = [...G.spawnedMobs].reverse() 
+	let closedOne = null 
+	for (let row of rev) {
+		for (let mob of row) {
+			if ((!closedOne && mob.alive) || ( mob.alive && Math.abs(closedOne.x-G.player.x) > Math.abs(mob.x-G.player.x)   ) )  {
+				console.log("foundone")
+				closedOne = mob
+			} 
+		}
+	}
+	let ray = document.createElement("div")
+	ray.id = "ray"
+	ray.classList.add("ray_1")
+	ray.style.position = "absolute"
+	ray.style.left = closedOne.x+"px"
+	ray.style.top = (closedOne.y+40)+"px"
+	G.rays.push(ray) 
+	G.playGround.appendChild(ray)
+}
 
-
-export  default function movMobs() {
+export   function movMobs() {
 		let xOffset = (5* G.direction) 
 		let yOffset = 40
 		let swip = false	
@@ -21,10 +40,11 @@ export  default function movMobs() {
 			if (!mob.alive) {
 				continue
 			}
-
+			if ( mob.element.style.left !== '0px' ) { 
+				console.log("updated")
 			mob.element.style.left = '0px'
  			mob.element.style.top  = '0px'
-			
+			}
 			if (mob.v ===  1)  {
 					mob.element.classList.remove(mob.name+"_1")
 					mob.element.classList.add(mob.name+"_2")
@@ -71,6 +91,7 @@ export  default function movMobs() {
 				mob.v = 1
 			}	
 			if ( ( mob.y+40 + yOffset) > 600)  {
+				mob.element.display = "none"
 				console.log("does this called")
 				break			
 			} else {

@@ -1,7 +1,8 @@
-import movMobs from "./game.js"
+import { movMobs,  shout}  from "./game.js"
 import { gamePlay as G } from "./state.js"
 import draw from "./draw.js"
 
+//import { spawenplayer, moveLeft, moveRight } from "./player.js"
 
 
 
@@ -45,9 +46,13 @@ function startGame() {
 	let shields = spawnShields()
 	
 
+
 	element.appendChild(fragment)	
 	element.appendChild(shields)
+	G.playGround = element
 	document.body.appendChild(element)
+	
+//	spawenplayer()
 }
 
 
@@ -102,18 +107,46 @@ function spawnShields() {
 
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+ 
+const movInterval = 800
+const fireInterval = 1500
+let lastTime = 0 
+let  cur = 0
+let fireTimer = 0
 
-async function loop() {
-	let direction = 1 
-	while (true) {
-		await sleep(800)
-		console.log("called")
+ function loop(timeStamp) {
+	let d = timeStamp-lastTime	
+	lastTime = timeStamp
+	cur+= (d)
+	fireTimer += d 
+	if (cur >= movInterval) {
+/*		if (fireTimer >= fireInterval) {
+				shout()
+				fireTimer = 0
+		} */
+		
 		movMobs() 
-	}
+		cur = 0
+	} 
+	
+	requestAnimationFrame(loop)
+
 }
 
 startGame()
 
 
-await loop()
+/*document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+        moveLeft();
+    }
+
+    if (event.key === "ArrowRight") {
+        moveRight();
+    }
+});
+*/
+requestAnimationFrame(loop)
+
+
 
