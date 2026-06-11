@@ -22,6 +22,7 @@ export function Spawenplayer() {
     };
 
     player.style.position = "absolute";
+	player.classList.add("cyan")
     player.style.left = `${x}px`;
     player.style.top = `${y}px`;
 }

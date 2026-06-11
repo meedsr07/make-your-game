@@ -63,6 +63,7 @@ body {
 	position: absolute;
     background-repeat: no-repeat;
     background-size: contain;
+	image-rendering: pixelated;
 	image-rendering: crisp-edges;
     background-position: center;
 	width: 40px;
@@ -80,6 +81,8 @@ body {
     height: 50px;
 
     background-image: url("assets/player.png");
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
