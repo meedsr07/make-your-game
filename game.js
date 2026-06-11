@@ -7,7 +7,7 @@ import {gamePlay as G}  from "./state.js"
 
 
 export  default function movMobs() {
-		let xOffset = (10* G.direction) 
+		let xOffset = (5* G.direction) 
 		let yOffset = 40
 		let swip = false	
 		// TO DO HANDLING WHEN IT touch shilds or ground

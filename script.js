@@ -87,7 +87,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 async function loop() {
 	let direction = 1 
 	while (true) {
-		await sleep(300)
+		await sleep(800)
 		console.log("called")
 		movMobs() 
 	}
