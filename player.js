@@ -5,7 +5,7 @@ export function Spawenplayer() {
     const player = document.createElement('div')
     player.id = 'playership'
     gamebox.append(player)
-    
+
     const gameWidth = 800;
     const gameHeight = 600;
     const playerSize = 50;
@@ -22,8 +22,40 @@ export function Spawenplayer() {
     };
 
     player.style.position = "absolute";
-	player.classList.add("cyan")
+    player.classList.add("cyan")
     player.style.left = `${x}px`;
     player.style.top = `${y}px`;
 }
 Spawenplayer()
+
+
+export function moveLeft() {
+    gamePlay.player.x -= gamePlay.player.speed;
+    updatePlayer();
+}
+
+export function moveRight() {
+    gamePlay.player.x += gamePlay.player.speed;
+    updatePlayer();
+}
+
+function updatePlayer() {
+    if (gamePlay.player.x < 0) {
+        gamePlay.player.x = 0;
+    }
+
+    if (gamePlay.player.x > 750) {
+        gamePlay.player.x = 750;
+    }
+    gamePlay.player.element.style.left = gamePlay.player.x + "px";
+}
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+        moveLeft();
+    }
+
+    if (event.key === "ArrowRight") {
+        moveRight();
+    }
+});
