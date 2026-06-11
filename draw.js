@@ -1,13 +1,14 @@
 
 const SHIELD = [
+  [0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0],
   [0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0],
   [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1],
+  [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
   [1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1],
   [1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1],
   [1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1],
-  [1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1],
+  [1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1],
   [1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1],
   [1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1],
   [1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1],
@@ -21,33 +22,30 @@ const SHIELD = [
 const ROWS = SHIELD.length;
 const COLS = SHIELD[0].length;
 
-let damaged = Array.from({length:ROWS}, ()=>new Array(COLS).fill(false));
-
-const canvas = document.getElementById('c');
-const ctx = canvas.getContext('2d');
 
 
 
-function draw(){
 
+export default function draw(canvas, damaged){
+
+  const ctx = canvas.getContext('2d');
+  let sc = 3
   canvas.width  = COLS * sc;
   canvas.height = ROWS * sc;
 
   ctx.clearRect(0,0,canvas.width,canvas.height);
-
   for(let r=0;r<ROWS;r++){
     for(let c=0;c<COLS;c++){
-      if(!SHIELD[r][c] || damaged[r][c]) continue;
+      if(!SHIELD[r][c] ) continue;
       const x = c*sc, y = r*sc;
-      ctx.fillStyle = toRgb(rgb);
+      ctx.fillStyle = "green";
       ctx.fillRect(x,y,sc,sc);
-      ctx.fillStyle = darken(rgb,0.55);
-      ctx.fillRect(x+5-1,y+5-1,1,1);
-      ctx.fillStyle = darken(rgb,1.3 > 1 ? 1 : 1.3);
+      ctx.fillStyle = "green";
+      ctx.fillRect(x+sc-1,y+sc-1,1,1);
+      ctx.fillStyle = "green";
       ctx.fillRect(x,y,1,1);
     }
   }
 }
 
-draw();
 

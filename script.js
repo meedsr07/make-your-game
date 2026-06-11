@@ -1,5 +1,6 @@
 import movMobs from "./game.js"
 import { gamePlay as G } from "./state.js"
+import draw from "./draw.js"
 
 
 
@@ -41,9 +42,11 @@ function startGame() {
 
 	
 	spawnMobs(element)
-
+	let shields = spawnShields()
+	
 
 	element.appendChild(fragment)	
+	element.appendChild(shields)
 	document.body.appendChild(element)
 }
 
@@ -78,6 +81,22 @@ function spawnMobs(container) {
 		} 
 			
 	}   	
+}
+
+
+function spawnShields() {
+	let offset = 200
+	let fragment = document.createDocumentFragment()
+	for (let i = 1 ; i <= 4 ; i++ ) {
+			let cv = document.createElement("canvas")
+			cv.style.position = "absolute"
+			cv.style.left = ((offset * i ) - 120 )  +"px" 
+			cv.style.top = 500+"px"
+			draw(cv, [])
+			fragment.append(cv)
+
+	} 
+		return fragment
 }
 
 
