@@ -28,6 +28,23 @@ body {
 	justify-content: center;
 }
 
+.brick {
+	height: 6px;
+	width: 6px;
+}
+
+.ray_exp {
+	background-image: url("assets/ray_exp.png") ; 
+	 background-size: contain;
+    image-rendering: pixelated;
+	image-rendering: crisp-edges;
+    background-position: center;
+	width: 20px;
+	height: 20px;
+
+}
+
+
 #container {
 	width: 800px;
 	position: relative;

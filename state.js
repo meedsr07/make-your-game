@@ -8,8 +8,10 @@ export const gamePlay = {
 		currentScore: 0,
 		direction: 1,
 		speed: 0,
+		shields: [], 
 		rays: [],
-		layers : ["violet",  "green", "cyan", "violet", "yellow", "red", "cyan"],
+		expQueue: [],
+		layers : ["violet",  "green", "cyan", "violet", "yellow", "red", "red"],
 		mobs : ["squid", "crab", "octpus"],
 
 }

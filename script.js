@@ -1,4 +1,4 @@
-import { movMobs,  shout}  from "./game.js"
+import { movMobs,  shout, movRays, cleanRays}  from "./game.js"
 import { gamePlay as G } from "./state.js"
 import draw from "./draw.js"
 
@@ -38,20 +38,15 @@ function startGame() {
 
 	let element = document.createElement("div") 
 	element.id = "container"
-	let fragment = document.createDocumentFragment()	
 
 
 	
 	spawnMobs(element)
-	let shields = spawnShields()
-	
 
-
-	element.appendChild(fragment)	
-	element.appendChild(shields)
 	G.playGround = element
 	document.body.appendChild(element)
-	
+	spawnShields()
+	console.log(G.bricks)	
 //	spawenplayer()
 }
 
@@ -78,7 +73,7 @@ function spawnMobs(container) {
 				fragment.appendChild(mob.element)
 
 			}		
-			G.spawnedMobs.push(row)
+			G.spawnedMobs.push([row, [...row].reverse()])
 
 			line++
 			container.appendChild(fragment) 	
@@ -86,49 +81,55 @@ function spawnMobs(container) {
 		} 
 			
 	}   	
+
+	G.reversedMobs = [...G.spawnedMobs].reverse()
 }
 
 
 function spawnShields() {
 	let offset = 200
-	let fragment = document.createDocumentFragment()
 	for (let i = 1 ; i <= 4 ; i++ ) {
-			let cv = document.createElement("canvas")
+			let cv = document.createElement("div")
+
+			cv.classList.add("shield")
 			cv.style.position = "absolute"
 			cv.style.left = ((offset * i ) - 120 )  +"px" 
 			cv.style.top = 500+"px"
-			draw(cv, [])
-			fragment.append(cv)
+			draw(cv, (offset * i) -120 , 500)
 
 	} 
-		return fragment
 }
 
 
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
  
-const movInterval = 800
+const movInterval = 50
 const fireInterval = 1500
+const raysInterval = 10
 let lastTime = 0 
 let  cur = 0
 let fireTimer = 0
+let raysTimer = 0 
 
  function loop(timeStamp) {
 	let d = timeStamp-lastTime	
 	lastTime = timeStamp
 	cur+= (d)
 	fireTimer += d 
+	raysTimer += d
+	if (raysTimer >= raysInterval) {
+				movRays()
+		} 
 	if (cur >= movInterval) {
-/*		if (fireTimer >= fireInterval) {
+		if (fireTimer >= fireInterval) {
 				shout()
 				fireTimer = 0
-		} */
-		
+		} 		
+	
+		cleanRays() 	
 		movMobs() 
 		cur = 0
-	} 
-	
+	} 	
 	requestAnimationFrame(loop)
 
 }
