@@ -50,7 +50,25 @@ function updatePlayer() {
     gamePlay.player.element.style.left = gamePlay.player.x + "px";
 }
 
+function SpawenBullet() {
+    const gamebox = document.getElementById('container')
+    const bullet = document.createElement('div')
+    bullet.id = 'bullet'
+    gamebox.append(bullet)
+    let shipX = gamePlay.player.x + 20
+    let shipY = gamePlay.player.y
+    gamePlay.Bullet.push({element : bullet , x : shipX , y : shipY , speed : 10})
+    bullet.style.position = 'absolute'
+    bullet.style.left = `${shipX}px`
+    bullet.style.top = `${shipY}px`
+
+}
+
+
 document.addEventListener("keydown", (event) => {
+    if (event.key === ' ') {
+        SpawenBullet()
+    }
     if (event.key === "ArrowLeft") {
         moveLeft();
     }
@@ -59,3 +77,4 @@ document.addEventListener("keydown", (event) => {
         moveRight();
     }
 });
+

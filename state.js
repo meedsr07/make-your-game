@@ -2,6 +2,7 @@
 
 export const gamePlay = {
 		player: {},	
+		Bullet : [],
 		spawnedMobs: [],
 		highestSccore: 0,
 		currentScore: 0,
