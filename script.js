@@ -13,7 +13,6 @@ function createMob(name, x, y) {
 		div.style.top = y+"px"
 		div.style.left = x+"px"
 		div.classList.add(name)
-		console.log(y/85)
 		let col = G.layers[Math.round(y/85)]
 		div.classList.add(col) 
 		
@@ -103,7 +102,7 @@ function spawnShields() {
 
 
  
-const movInterval = 50
+const movInterval = 200
 const fireInterval = 1500
 const raysInterval = 10
 let lastTime = 0 
@@ -118,8 +117,9 @@ let raysTimer = 0
 	fireTimer += d 
 	raysTimer += d
 	if (raysTimer >= raysInterval) {
-				movRays()
-		} 
+		movRays()
+		raysTimer = 0
+	} 
 	if (cur >= movInterval) {
 		if (fireTimer >= fireInterval) {
 				shout()

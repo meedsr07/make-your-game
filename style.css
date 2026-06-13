@@ -48,6 +48,7 @@ body {
 #container {
 	width: 800px;
 	position: relative;
+    box-sizing: border-box;
 	height: 600px;
 	border: solid;
 	border-width:1px;

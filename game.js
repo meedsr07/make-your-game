@@ -33,10 +33,10 @@ export  function shout() {
 
 function destroyShield(ray) {
 		let shield = null 
-		let head = {x: ray.x+10, y: ray.y+20  } 
+		let head = {x: ray.x+1, y: ray.y+20  } 
 		
 		for (let sh of G.shields) {
-				if ( Math.abs(sh.x-head.x) <= 30 &&  Math.abs(sh.y-head.y) <= 20  ) {
+				if ( Math.abs(sh.x-head.x) <= (6 * 6) &&  Math.abs(sh.y-head.y) <= (6*4)  ) {
 
 						console.log("fuckyou")
 						shield = sh 
@@ -49,9 +49,10 @@ function destroyShield(ray) {
 		let queue = [] 
 		let makeExp = false
 		 for (let brick of shield.bricks) {
-				if ( Math.abs(brick.x-head.x) < 12  &&  Math.abs(brick.y-(head.y)) < 12 ) {
-				if ( Math.abs(brick.x-head.x) <= 4  &&  Math.abs(brick.y-(head.y)) <= 4    ) {
+				if ( Math.abs((brick.x)-head.x) <= 8   &&  Math.abs((brick.y)-(head.y)) <= 20 ) {
+				if ( Math.abs((brick.x)-head.x) === 0 &&  Math.abs((brick.y)-(head.y)) <= 10    ) {
 						makeExp = true
+						
 				}
 					queue.push(brick) 
 				}
@@ -72,14 +73,14 @@ function destroyShield(ray) {
 
 export function  movRays() {
 	for (let ray of G.rays ) {
-			if ( (ray.y+ 5) > 600 ) { 
+			if ( ((ray.y+20)+ 1) > 600 ) { 
 				destroyRay(ray)
 				return 
 			}
 			if (destroyShield(ray)) {
 					return 
 			} 
-			ray.y += 5
+			ray.y += 1
 			
 			ray.element.classList.remove(ray.col)
 			ray.col = G.layers[Math.round(ray.y/85) ]   || "red" 
