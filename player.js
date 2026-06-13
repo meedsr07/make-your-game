@@ -52,6 +52,7 @@ function updatePlayer() {
 
 function SpawenBullet() {
     const gamebox = document.getElementById('container')
+    if (gamePlay.Bullet.length > 0) return
     const bullet = document.createElement('div')
     bullet.id = 'bullet'
     gamebox.append(bullet)
