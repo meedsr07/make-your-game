@@ -21,8 +21,8 @@ export  function shout() {
 	ray.element.style.position = "absolute"
 	ray.element.style.left = 0 
 	ray.element.style.top = 0
-	ray.x = closedOne.x
-	ray.y = closedOne.y+40
+	ray.x = closedOne.x+20
+	ray.y = closedOne.y+20
 	ray.element.style.transform =  `translate(${ray.x}px, ${ray.y}px)`
 	ray.col = G.layers[Math.round(ray.y/85) ]  || "red"
 	ray.element.classList.add(ray.col)
@@ -33,7 +33,7 @@ export  function shout() {
 
 function destroyShield(ray) {
 		let shield = null 
-		let head = {x: ray.x+1, y: ray.y+20  } 
+		let head = {x: ray.x+10, y: ray.y+20+4  } 
 		
 		for (let sh of G.shields) {
 				if ( Math.abs(sh.x-head.x) <= (6 * 6) &&  Math.abs(sh.y-head.y) <= (6*4)  ) {
@@ -49,8 +49,8 @@ function destroyShield(ray) {
 		let queue = [] 
 		let makeExp = false
 		 for (let brick of shield.bricks) {
-				if ( Math.abs((brick.x)-head.x) <= 8   &&  Math.abs((brick.y)-(head.y)) <= 20 ) {
-				if ( Math.abs((brick.x)-head.x) === 0 &&  Math.abs((brick.y)-(head.y)) <= 10    ) {
+				if ( Math.abs((brick.x+3)-head.x) <= 8   &&  Math.abs((brick.y+3)-(head.y)) <= 16 ) {
+				if ( Math.abs((brick.x+3)-head.x) <= 3  &&  Math.abs((brick.y+3)-(head.y)) <= 10    ) {
 						makeExp = true
 						
 				}
@@ -73,14 +73,14 @@ function destroyShield(ray) {
 
 export function  movRays() {
 	for (let ray of G.rays ) {
-			if ( ((ray.y+20)+ 1) > 600 ) { 
+			if ( ((ray.y+20)+ 4) > 600 ) { 
 				destroyRay(ray)
 				return 
 			}
 			if (destroyShield(ray)) {
 					return 
 			} 
-			ray.y += 1
+			ray.y += 4
 			
 			ray.element.classList.remove(ray.col)
 			ray.col = G.layers[Math.round(ray.y/85) ]   || "red" 
