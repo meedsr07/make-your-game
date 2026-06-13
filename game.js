@@ -58,7 +58,7 @@ function destroyShield(ray) {
 				}
 		 }
 		if (makeExp === true) {
-				destroyRay(ray)
+				destroyRay(ray, "green")
 				for (let br of queue) {
 						shield.bricks.splice(shield.bricks.indexOf(br), 1)
 						br.element.remove()
@@ -71,10 +71,23 @@ function destroyShield(ray) {
 	
 }
 
+function overridShields(mob) {
+	for (let shield of G.shields) {
+			for (let brick of shield.bricks) {
+					if ( ( (brick.x+3) >=  mob.x &&  (brick.x+3) <= mob.x+48) && ( (brick.y+3) >=  mob.y &&  (brick.y+3) <= mob.y+32)) {
+						shield.bricks.splice(shield.bricks.indexOf(brick), 1)
+						brick.element.remove()
+
+					}
+			}
+	}	
+}
+
+
 export function  movRays() {
 	for (let ray of G.rays ) {
 			if ( ((ray.y+20)+ 4) > 600 ) { 
-				destroyRay(ray)
+				destroyRay(ray, "red")
 				return 
 			}
 			if (destroyShield(ray)) {
@@ -90,7 +103,7 @@ export function  movRays() {
 	} 
 }
 
-function  destroyRay(ray) {
+function  destroyRay(ray, col) {
 		G.rays.splice(G.rays.indexOf(ray), 1)
 		ray.element.remove()
 		let exp = document.createElement("div")
@@ -98,23 +111,28 @@ function  destroyRay(ray) {
 		exp.style.position = "absolute"
 		exp.style.left = 0
 		exp.style.right = 0
-		exp.style.transform =  `translate(${ray.x}px, ${ray.y}px)`	
-		exp.classList.add(ray.col)
+		exp.style.transform =  `translate(${ray.x}px, ${ray.y+10}px)`	
+		exp.classList.add(col)
 		G.playGround.appendChild(exp)
-		G.expQueue.push(exp)
+		G.expQueue.push({element: exp, frames: 4 })
 }
 
 export function  cleanRays() {
 		let i = 0 
 		for (let exp of G.expQueue)  {
-			exp.remove()		
+			if (!exp.frames) {
+				exp.element.remove()
+				G.expQueue.splice(G.expQueue.indexOf(exp, 1)) 
+			} else {
+				exp.frames--
+			}
 		}
-		G.expQueue.length = 0
+		
 }
 
 export   function movMobs() {
 		let xOffset = ( 5* G.direction) 
-		let yOffset = 40
+		let yOffset = 20
 		let swip = false	
 
 		for (let row of G.spawnedMobs) {
@@ -146,6 +164,7 @@ export   function movMobs() {
 			} else {
 				mob.x += xOffset 
 				mob.element.style.transform = `translate(${mob.x}px, ${mob.y}px)`
+				overridShields(mob)
 			}
 
 		}
@@ -172,7 +191,7 @@ export   function movMobs() {
 				mob.element.classList.replace(mob.name+"_2", mob.name+"_1")
 				mob.v = 1
 			}
-			if ( ( mob.y+40 + yOffset) >= 600)  {
+			if ( ( mob.y+32 + yOffset) >= 600)  {
 				mob.element.remove() 
 			} else {
 				mob.y += yOffset 
@@ -180,6 +199,7 @@ export   function movMobs() {
 				mob.element.classList.remove(mob.col)
 				mob.col = G.layers[Math.round(mob.y/85)]
 				mob.element.classList.add(mob.col)
+				overridShields(mob)
 
 			}
 		}

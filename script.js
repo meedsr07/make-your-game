@@ -122,6 +122,7 @@ let raysTimer = 0
 	} 
 	if (cur >= movInterval) {
 		if (fireTimer >= fireInterval) {
+				
 				shout()
 				fireTimer = 0
 		} 		

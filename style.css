@@ -95,8 +95,8 @@ body {
     image-rendering: pixelated;
 	image-rendering: crisp-edges;
     background-position: center;
-	width: 40px;
-	height: 40px;
+	width: 48px;
+	height: 32px;
 }
 #mob1 {
 	position: absolute;
