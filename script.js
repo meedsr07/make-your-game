@@ -103,7 +103,7 @@ function spawnShields() {
 
  
 const movInterval = 50
-const fireInterval = 20
+const fireInterval = 800
 const raysInterval = 1
 let lastTime = 0 
 let  cur = 0

@@ -16,8 +16,10 @@ export  function shout() {
 	}
 	let ray = {} 
 	ray.element = document.createElement("div")
+	ray.id = 1
+	ray.name = "ray_"+rand(1, 3)+"_"
+	ray.element.style.backgroundImage = "url(assets/"+ray.name+ray.id+".png)"
 	ray.element.id = "ray"
-	ray.element.classList.add("ray_1")
 	ray.element.style.position = "absolute"
 	ray.element.style.left = 0 
 	ray.element.style.top = 0
@@ -37,8 +39,6 @@ function destroyShield(ray) {
 		
 		for (let sh of G.shields) {
 				if ( Math.abs(sh.x-head.x) <= (6 * 6) &&  Math.abs(sh.y-head.y) <= (6*4)  ) {
-
-						console.log("fuckyou")
 						shield = sh 
 						break 
 				}
@@ -81,8 +81,9 @@ export function  movRays() {
 					return 
 			} 
 			ray.y += 4
-			
+			ray.id = ((ray.id+1)%5) || 1
 			ray.element.classList.remove(ray.col)
+			ray.element.style.backgroundImage = "url(assets/"+ray.name+ray.id+".png)"
 			ray.col = G.layers[Math.round(ray.y/85) ]   || "red" 
 			ray.element.classList.add(ray.col)
 			ray.element.style.transform =  `translate(${ray.x}px, ${ray.y}px)`	
@@ -90,7 +91,6 @@ export function  movRays() {
 }
 
 function  destroyRay(ray) {
-
 		G.rays.splice(G.rays.indexOf(ray), 1)
 		ray.element.remove()
 		let exp = document.createElement("div")
@@ -174,7 +174,6 @@ export   function movMobs() {
 			}
 			if ( ( mob.y+40 + yOffset) >= 600)  {
 				mob.element.remove() 
-				break			
 			} else {
 				mob.y += yOffset 
 				mob.element.style.transform = `translate(${mob.x}px, ${mob.y}px)`
@@ -187,3 +186,6 @@ export   function movMobs() {
 		}
 		} 
 }
+
+
+const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min

@@ -78,9 +78,6 @@ body {
 }
 
 
-.ray_1 {
-	background-image: url("assets/ray_1_1_fixed.png")  
-}
 #ray {
 	position: absolute;
     background-repeat: no-repeat;
