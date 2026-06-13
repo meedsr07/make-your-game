@@ -18,7 +18,7 @@ export function Spawenplayer() {
         element: player,
         x: x,
         y: y,
-        speed: 5
+        speed: 10
     };
 
     player.style.position = "absolute";
@@ -55,7 +55,7 @@ function SpawenBullet() {
     const bullet = document.createElement('div')
     bullet.id = 'bullet'
     gamebox.append(bullet)
-    let shipX = gamePlay.player.x + 20
+    let shipX = gamePlay.player.x + 22
     let shipY = gamePlay.player.y
     gamePlay.Bullet.push({element : bullet , x : shipX , y : shipY , speed : 10})
     bullet.style.position = 'absolute'
@@ -64,6 +64,29 @@ function SpawenBullet() {
 
 }
 
+function gameLoop() {
+	updateBullets();
+
+	requestAnimationFrame(gameLoop);
+}
+
+function updateBullets() {
+	for (let i = 0; i < gamePlay.Bullet.length; i++) {
+		let bullet = gamePlay.Bullet[i];
+
+		bullet.y -= bullet.speed;
+
+		bullet.element.style.top = bullet.y + "px";
+
+		if (bullet.y < 0) {
+			bullet.element.remove();
+			gamePlay.Bullet.splice(i, 1);
+			i--;
+		}
+	}
+}
+
+gameLoop();
 
 document.addEventListener("keydown", (event) => {
     if (event.key === ' ') {
