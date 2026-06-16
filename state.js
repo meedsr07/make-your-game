@@ -10,9 +10,10 @@ export const gamePlay = {
 		speed: 0,
 		shields: [], 
 		rays: [],
+		functionsQueue: [],
 		expQueue: [],
 		layers : ["violet",  "green", "cyan", "violet", "yellow", "red", "red"],
-		mobs : ["squid", "crab", "octpus"],
+		mobs : [{name: "squid", points: 30, ufo: false}, {name: "crab", points: 40, ufo : false}, {name: "octpus", points: 60, ufo : false}, {name: "ufo", points: 150, ufo : true}]
 
 }
 

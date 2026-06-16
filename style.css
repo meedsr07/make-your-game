@@ -1,5 +1,5 @@
 
-.violet {
+/*.violet {
 	filter : brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(3000%) hue-rotate(260deg) brightness(100%) contrast(100%);
 }
 
@@ -18,7 +18,7 @@
 
 .red {
     filter: brightness(0) saturate(100%) invert(15%) sepia(100%) saturate(7000%) hue-rotate(0deg) brightness(100%) contrast(110%);
-}
+}*/
 
 body {
 	background-color: black;
@@ -56,25 +56,38 @@ body {
 }
 
 .squid_1 {
-	background-image: url("assets/squid_1.png")  
+	background-image: url("assets/squid_1.png"); 
+	width: 48px;
+	height: 24px;
 }
 
 .squid_2 {
-	background-image: url("assets/squid_2.png")  
+	background-image: url("assets/squid_2.png");  
+	width: 48px;
+	height: 24px;
 }
 
 .crab_1 {
-	background-image: url("assets/crab_1.png")  
+	background-image: url("assets/crab_1.png"); 
+	width: 48px;
+	height: 32px;
 }
 
 .crab_2 {
-	background-image: url("assets/crab_2.png")  
+	background-image: url("assets/crab_2.png"); 
+	width: 48px;
+	height: 32px;
 }
 .octpus_1 {
-	background-image: url("assets/octpus_1.png")  
+	background-image: url("assets/octpus_1.png");  
+	width: 48px;
+	height: 32px;
 }
+
 .octpus_2 {
-	background-image: url("assets/octpus_2.png")  
+	background-image: url("assets/octpus_2.png");  
+	width: 48px;
+	height: 32px;
 }
 
 
@@ -95,8 +108,7 @@ body {
     image-rendering: pixelated;
 	image-rendering: crisp-edges;
     background-position: center;
-	width: 48px;
-	height: 32px;
+
 }
 #mob1 {
 	position: absolute;
@@ -119,4 +131,5 @@ body {
 
     position: absolute;
 }
+
 

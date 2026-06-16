@@ -119,9 +119,10 @@ function  destroyRay(ray, col) {
 
 export function  cleanRays() {
 		let i = 0 
-		for (let exp of G.expQueue)  {
+		let copy = G.expQueue
+		for (let exp of copy)  {
 			if (!exp.frames) {
-				exp.element.remove()
+				exp.element.style.display = "none"
 				G.expQueue.splice(G.expQueue.indexOf(exp, 1)) 
 			} else {
 				exp.frames--
@@ -151,21 +152,22 @@ export   function movMobs() {
  				mob.element.style.top  = '0px'
 			}
 			if (mob.v ===  1)  {
-					mob.element.classList.replace(mob.name+"_1", mob.name+"_2")
+					mob.element.classList.replace(mob.mob.name+"_1", mob.mob.name+"_2")
 					mob.v = 2
 			} else {
-				mob.element.classList.replace(mob.name+"_2", mob.name+"_1")
+				mob.element.classList.replace(mob.mob.name+"_2", mob.mob.name+"_1")
 				mob.v = 1
 			}	
 			if ((( mob.x+40 + xOffset) >= 800) || ( (mob.x + (xOffset) ) <= 0 ) ) {
 				swip = true 
 				
-				break			
+				//break			
 			} else {
 				mob.x += xOffset 
 				mob.element.style.transform = `translate(${mob.x}px, ${mob.y}px)`
 				overridShields(mob)
 			}
+			
 
 		}
 		
@@ -185,10 +187,10 @@ export   function movMobs() {
 			
 	
 			if (mob.v ===  1)  {
-					mob.element.classList.replace(mob.name+"_1", mob.name+"_2")
+					mob.element.classList.replace(mob.mob.name+"_1", mob.mob.name+"_2")
 					mob.v = 2
 			} else {
-				mob.element.classList.replace(mob.name+"_2", mob.name+"_1")
+				mob.element.classList.replace(mob.mob.name+"_2", mob.mob.name+"_1")
 				mob.v = 1
 			}
 			if ( ( mob.y+32 + yOffset) >= 600)  {

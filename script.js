@@ -7,19 +7,19 @@ import draw from "./draw.js"
 
 
 
-function createMob(name, x, y) {
+function createMob(mob, x, y) {
 		let div = document.createElement("div")	
 		div.id = "alien"
 		div.style.top = y+"px"
 		div.style.left = x+"px"
-		div.classList.add(name)
+		div.classList.add(mob.name)
 		let col = G.layers[Math.round(y/85)]
 		div.classList.add(col) 
 		
-		div.classList.add(name+"_1") 
+		div.classList.add(mob.name+"_1") 
 		div.style.display = "block"
-		let mob = {
-				name: name,
+		let obj = {
+				mob: mob,
 				v: 1,
 				col: col,
 				element: div,
@@ -28,7 +28,7 @@ function createMob(name, x, y) {
 				y: y,
 				alive: true,  // may not keep	
 		}
-		return mob
+		return obj
 } 
 
 
@@ -45,7 +45,7 @@ function startGame() {
 	G.playGround = element
 	document.body.appendChild(element)
 	spawnShields()
-	console.log(G.bricks)	
+	requestAnimationFrame(loop)
 //	spawenplayer()
 }
 
@@ -59,6 +59,7 @@ function spawnMobs(container) {
 	let line = 0
 	let fragment = 	document.createDocumentFragment()
 	for (let i = 0; i < G.mobs.length ; i++ ) {
+			if (G.mobs[i].ufo) continue
 			let j = 2
 			if (i === 0) {
 				j = 1  
@@ -102,7 +103,7 @@ function spawnShields() {
 
 
  
-const movInterval = 50
+const movInterval = 100
 const fireInterval = 800
 const raysInterval = 1
 let lastTime = 0 
@@ -111,12 +112,13 @@ let fireTimer = 0
 let raysTimer = 0 
 
  function loop(timeStamp) {
+	if (!lastTime) lastTime = timeStamp
 	let d = timeStamp-lastTime	
 	lastTime = timeStamp
 	cur+= (d)
 	fireTimer += d 
 	raysTimer += d
-	if (raysTimer >= raysInterval) {
+if (raysTimer >= raysInterval) {
 		movRays()
 		raysTimer = 0
 	} 
@@ -127,15 +129,15 @@ let raysTimer = 0
 				fireTimer = 0
 		} 		
 	
-		cleanRays() 	
-		movMobs() 
+			movMobs() 
 		cur = 0
 	} 	
+	cleanRays() 	
+
 	requestAnimationFrame(loop)
 
 }
 
-startGame()
 
 
 /*document.addEventListener("keydown", (event) => {
@@ -148,7 +150,7 @@ startGame()
     }
 });
 */
-requestAnimationFrame(loop)
+requestAnimationFrame(startGame)
 
 
 
