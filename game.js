@@ -1,15 +1,15 @@
-import {gamePlay as G}  from "./state.js"
+import {gamePlay as G}  from "./app/state.js"
 
 
 
 
 
-export  function shout() {
+export  function shot() {
  	let rev = [...G.spawnedMobs].reverse() 
 	let closedOne = null 
 	for (let row of rev) {
 		for (let mob of row[0]) {
-			if ((!closedOne && mob.alive) || ( mob.alive && Math.abs(closedOne.x-G.player.x) > Math.abs(mob.x-G.player.x)   ) )  {
+			if ((!closedOne ) || (  Math.abs(closedOne.x-G.player.x) > Math.abs(mob.x-G.player.x)   ) )  {
 				closedOne = mob
 			} 
 		}
@@ -26,10 +26,8 @@ export  function shout() {
 	ray.x = closedOne.x+20
 	ray.y = closedOne.y+20
 	ray.element.style.transform =  `translate(${ray.x}px, ${ray.y}px)`
-	ray.col = G.layers[Math.round(ray.y/85) ]  || "red"
-	ray.element.classList.add(ray.col)
 	G.rays.push(ray) 
-	G.playGround.appendChild(ray.element)
+	G.playGround.element.appendChild(ray.element)
 }
 
 
@@ -50,7 +48,7 @@ function destroyShield(ray) {
 		let makeExp = false
 		 for (let brick of shield.bricks) {
 				if ( Math.abs((brick.x+3)-head.x) <= 8   &&  Math.abs((brick.y+3)-(head.y)) <= 16 ) {
-				if ( Math.abs((brick.x+3)-head.x) <= 3  &&  Math.abs((brick.y+3)-(head.y)) <= 10    ) {
+				if (Math.abs((brick.x+3)-head.x) <= 3  &&  Math.abs((brick.y+3)-(head.y)) <= 10    ) {
 						makeExp = true
 						
 				}
@@ -67,8 +65,7 @@ function destroyShield(ray) {
 		} else {
 			return false
 		}
-		return true 
-	
+		return true 	
 }
 
 function overridShields(mob) {
@@ -97,7 +94,6 @@ export function  movRays() {
 			ray.id = ((ray.id+1)%5) || 1
 			ray.element.classList.remove(ray.col)
 			ray.element.style.backgroundImage = "url(assets/"+ray.name+ray.id+".png)"
-			ray.col = G.layers[Math.round(ray.y/85) ]   || "red" 
 			ray.element.classList.add(ray.col)
 			ray.element.style.transform =  `translate(${ray.x}px, ${ray.y}px)`	
 	} 
@@ -113,7 +109,7 @@ function  destroyRay(ray, col) {
 		exp.style.right = 0
 		exp.style.transform =  `translate(${ray.x}px, ${ray.y+10}px)`	
 		exp.classList.add(col)
-		G.playGround.appendChild(exp)
+		G.playGround.element.appendChild(exp)
 		G.expQueue.push({element: exp, frames: 4 })
 }
 
@@ -144,32 +140,15 @@ export   function movMobs() {
 		
 			for (let mob of row[index]) {
 		
-			if (!mob.alive) {
-				continue
-			}
-			if ( mob.element.style.left !== '0px' ) { 
-				mob.element.style.left = '0px'
- 				mob.element.style.top  = '0px'
-			}
-			if (mob.v ===  1)  {
-					mob.element.classList.replace(mob.mob.name+"_1", mob.mob.name+"_2")
-					mob.v = 2
-			} else {
-				mob.element.classList.replace(mob.mob.name+"_2", mob.mob.name+"_1")
-				mob.v = 1
-			}	
-			if ((( mob.x+40 + xOffset) >= 800) || ( (mob.x + (xOffset) ) <= 0 ) ) {
-				swip = true 
-				
-				//break			
-			} else {
-				mob.x += xOffset 
-				mob.element.style.transform = `translate(${mob.x}px, ${mob.y}px)`
-				overridShields(mob)
-			}
+			
+		
+				if (!mob.mov(xOffset, "x", G.playGround)) {
+						swip = true 
+						break
+				} 	
 			
 
-		}
+			}
 		
 		}
 		if (swip) {
@@ -180,32 +159,13 @@ export   function movMobs() {
 				}
 			for (let row of G.reversedMobs) {
 			
-			for (let mob of row[0]) {
-				if (!mob.alive) {
-					continue
-				}	
-			
-	
-			if (mob.v ===  1)  {
-					mob.element.classList.replace(mob.mob.name+"_1", mob.mob.name+"_2")
-					mob.v = 2
-			} else {
-				mob.element.classList.replace(mob.mob.name+"_2", mob.mob.name+"_1")
-				mob.v = 1
+				for (let mob of row[0]) {
+					if (!mob.mov(yOffset, "y", G.playGround.height)) {
+						alert("game Over")
+					}
+					
+			   }
 			}
-			if ( ( mob.y+32 + yOffset) >= 600)  {
-				mob.element.remove() 
-			} else {
-				mob.y += yOffset 
-				mob.element.style.transform = `translate(${mob.x}px, ${mob.y}px)`
-				mob.element.classList.remove(mob.col)
-				mob.col = G.layers[Math.round(mob.y/85)] || "red"
-				mob.element.classList.add(mob.col)
-				overridShields(mob)
-
-			}
-		}
-		}
 		} 
 }
 

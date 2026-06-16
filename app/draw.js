@@ -12,13 +12,13 @@ const SHIELD = [
 ]
 
 const ROWS = SHIELD.length;
-const COLS = SHIELD[0].length;
+export const COLS = SHIELD[0].length;
 
 
 
 
 
-export default function draw(shield, x, y,   d){
+export  function draw(shield, x, y,   d){
 
 let frags = document.createDocumentFragment()
 	let bricks = [] 
@@ -41,7 +41,7 @@ let frags = document.createDocumentFragment()
     }
   }
 	G.shields.push({y : y+((ROWS*6)/2) , x : x+((COLS*6)/2), bricks: bricks }) 
-	G.playGround.appendChild(frags)
+	G.playGround.element.appendChild(frags)
 }
 
 
