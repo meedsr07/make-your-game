@@ -3,6 +3,7 @@
 export const gamePlay = {
 		playGround: {width: 800, height: 600},
 		player: {},	
+		Bullets:  [],
 		spawnedMobs: [],
 		bricks: new Map(), 
 		highestSccore: 0,
@@ -18,3 +19,8 @@ export const gamePlay = {
 
 
 
+export const keysstate = {
+    left : false,
+    right : false , 
+
+}
