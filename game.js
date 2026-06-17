@@ -140,9 +140,9 @@ export   function moveMobs() {
 		
 			for (let mob of row[index]) {
 		
-			
+					
 		
-				if (!mob.move(xOffset, "x", G.playGround.width)) {
+				if (!mob.move(xOffset, "x", G.playGround.width) && mob.alive) {
 						swip = true 
 						break
 				} 	
@@ -160,7 +160,7 @@ export   function moveMobs() {
 			for (let row of G.reversedMobs) {
 			
 				for (let mob of row[0]) {
-					if (!mob.move(yOffset, "y", G.playGround.height)) {
+					if (!mob.move(yOffset, "y", G.playGround.height) && mob.alive) {
 						alert("game Over")
 					}
 					

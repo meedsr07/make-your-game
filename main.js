@@ -1,6 +1,9 @@
 import { moveMobs}  from "./game.js"
-import { gamePlay as G } from "./app/state.js"
+import { gamePlay as G, keysstate } from "./app/state.js"
 import {spawnMobs, spawnShields } from "./app/scene.js"
+import * as player  from "./app/player.js"
+import { checkBulletEnemyCollision } from "./app/collision.js";
+
 
 
 
@@ -16,8 +19,9 @@ function startGame() {
 	document.body.appendChild(G.playGround.element)
 
 	spawnShields()
+	player.spawnPlayer()
 	requestAnimationFrame(gameLoop)
-//	spawenplayer()
+	
 }
 
 
@@ -33,6 +37,20 @@ function gameLoop(timestamp) {
 		moveMobs()
 		lastTime = timestamp
 	}
+	if (keysstate.bullet) {
+		player.spawenBullet()
+		keysstate.bullet = false
+	}
+    if (keysstate.left) {
+        player.moveLeft()
+    }
+    if (keysstate.right) {
+        player.moveRight()
+    }
+
+    player.updateBullets();
+    checkBulletEnemyCollision();
+    
 	// G.score.textContent = (timestamp-start) / 1000
 	requestAnimationFrame(gameLoop)
 }

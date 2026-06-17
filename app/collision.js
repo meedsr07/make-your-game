@@ -1,21 +1,23 @@
-import { gamePlay } from "./state.js";
+import { gamePlay as G } from "./state.js";
 
 
 export function checkBulletEnemyCollision() {
-
-    for (let i = 0; i < gamePlay.Bullet.length; i++) {
-        let bullet = gamePlay.Bullet[i];
+		if (!G.bullet) return 	
+		let bullet = G.bullet 
         // get the position of the bullet part of the screen
         const bulletRect = bullet.element.getBoundingClientRect();
-        // loop  in  enemies in the gamePlay.spawnedMobs array  
-        for (let r = 0; r < gamePlay.spawnedMobs.length; r++) {
-            let row = gamePlay.spawnedMobs[r];
-            for (let m = 0; m < row.length; m++) {
-                let enemy = row[m];
+        // loop  in  enemies in the G.spawnedMobs array  
+        for (let r = 0; r < G.spawnedMobs.length; r++) {
+            let row = G.spawnedMobs[r][0];
+			let rowR = G.spawnedMobs[r][1];
 
+            for (let m = 0; m < row.length; m++) {
+				
+                let enemy = row[m];
+				console.log(enemy)
                 // if (!enemy || !enemy.element) continue;
 
-                const enemyRect = enemy.element.getBoundingClientRect();
+                const enemyRect = enemy.element.getBoundingClientRect(); // this must be removed 
                 // check if the bullet rectangle intersects with the enemy rectangle
                 const hit =
                     bulletRect.left < enemyRect.right &&
@@ -24,23 +26,22 @@ export function checkBulletEnemyCollision() {
                     bulletRect.bottom > enemyRect.top;
 
                 if (hit) {
-                    updateScore(enemy)
                     // remove DOM elements
                     bullet.element.remove();
-                    enemy.element.remove();
+
+                    enemy.kill();
 
                     // remove from arrays
-                    gamePlay.Bullet.splice(i, 1);
-                    row.splice(m, 1);
+                    G.bullet = null;
+                   // row.splice(m, 1);
+				//	rowR.splice(m, 1);
 
-                    i--;
-                    m--;
+                 //  m--;
 
                     return
                 }
             }
         }
-    }
 }
 
 
@@ -53,17 +54,17 @@ export function Score() {
 
 function updateScore(enemy) {
     if (enemy.name === "squid") {
-        gamePlay.currentScore += 25;
+        G.currentScore += 25;
     }
 
     if (enemy.name === "crab") {
-        gamePlay.currentScore += 15;
+        G.currentScore += 15;
     }
 
     if (enemy.name === "octpus") {
-        gamePlay.currentScore += 10;
+        G.currentScore += 10;
     }
 
     const score = document.getElementById('score');
-    score.textContent = `Score : ${gamePlay.currentScore}`;
+    score.textContent = `Score : ${G.currentScore}`;
 }

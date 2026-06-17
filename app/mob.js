@@ -23,6 +23,7 @@ export class Mob {
 		this.y = y
 		this.width = 40
 		this.height = 40 
+		this.alive = true
 		this.image = 1
 	}
 
@@ -52,7 +53,8 @@ export class Mob {
 
 
 	kill() {
-			this.element.remove() 
+			this.element.style.display = "none" 
+			this.alive = false
 			//spawn exp image just replace background image and append to cleaning quene  
 	}
 	
