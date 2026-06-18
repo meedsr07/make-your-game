@@ -96,9 +96,9 @@ function destroyShield(ray) {
 }
 
 function overridShields(mob) {
-			for (let brick of G.bricks) { // must update to handle map
-					if ( ( (brick.x+3) >=  mob.x &&  (brick.x+3) <= mob.x+48) && ( (brick.y+3) >=  mob.y &&  (brick.y+3) <= mob.y+32)) {
-						shield.bricks.splice(G.bricks.indexOf(brick), 1)
+			for (let [key, brick] of G.bricks) { // must update to handle map
+					if ( ( (brick.x+3) >=  mob.x &&  (brick.x+3) <= mob.x+40) && ( (brick.y+3) >=  mob.y &&  (brick.y+3) <= mob.y+32)) {
+						G.bricks.delete(key)
 						brick.element.remove()
 
 					}
@@ -168,12 +168,12 @@ export   function moveMobs(xOffset) {
 			for (let mob of row[index]) {
 		
 					
-		
+					
 				if (!mob.move(xOffset, "x", G.playGround.width) && mob.alive) {
 						swip = true 
 						break
 				} 	
-			
+				overridShields(mob)
 
 			}
 		

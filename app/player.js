@@ -57,7 +57,7 @@ export function spawenBullet() {
     gamebox.append(bullet)
     let shipX = G.player.x + 25
 	let shipY = G.player.y+10
-    G.bullet = ({ element: bullet, x: shipX, y: shipY, speed: 4, height: 10, width: 10 })
+    G.bullet = ({ element: bullet, x: shipX, y: shipY, speed: 6, height: 10, width: 10 })
     bullet.style.position = 'absolute'
     bullet.style.left = `0px`
     bullet.style.top = `0px`

@@ -26,17 +26,12 @@ export function checkBulletEnemyCollision() {
 			    G.bullet.y + G.bullet.height > enemy.y;
                     if (hit) {
 
-                    // remove DOM elements
                     bullet.element.remove();
 
                     enemy.kill();
 					G.aliveMobs--
-                    // remove from arrays
                     G.bullet = null;
-                   // row.splice(m, 1);
-				//	rowR.splice(m, 1);
-
-                 //  m--;
+              
 
                     return
                 }
