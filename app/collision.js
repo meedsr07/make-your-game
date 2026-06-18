@@ -60,7 +60,7 @@ function hitShield(b) {
         for (let px = b.x; px <= b.x + b.width/2; px++) {
             const key = `${px},${py}`;
             if (G.bricks.has(key)) {
-                G.bricks.get(key).remove();
+                G.bricks.get(key).element.remove();
                 G.bricks.delete(key);
                 b.element.remove();
 				if (b.sign) {

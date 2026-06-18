@@ -24,7 +24,7 @@ export function spawnPlayer() {
     player.classList.add("cyan")
     player.style.left = `0px`;
     player.style.top = `0px`;
-	 G.player.element.style.transform = `translate(${G.player.x}px, ${G.player.y}px)`;
+	G.player.element.style.transform = `translate(${G.player.x}px, ${G.player.y}px)`;
 
 }
 
