@@ -14,13 +14,12 @@ export  function shot() {
 			} 
 		}
 	}
-	let ray = {} 
+	let ray = {height: 10, width:10 } 
 	ray.element = document.createElement("div")
-	ray.id = 1
-	ray.name = "ray_"+rand(1, 3)+"_"
-	ray.element.style.backgroundImage = "url(assets/"+ray.name+ray.id+".png)"
-	ray.element.id = "ray"
+	//ray.name = "ray_"+rand(1, 3)+"_"
+	ray.element.id = "bullet"
 	ray.element.style.position = "absolute"
+	ray.element.classList.add("red")
 	ray.element.style.left = 0 
 	ray.element.style.top = 0
 	ray.x = closedOne.x+20
@@ -28,6 +27,34 @@ export  function shot() {
 	ray.element.style.transform =  `translate(${ray.x}px, ${ray.y}px)`
 	G.rays.push(ray) 
 	G.playGround.element.appendChild(ray.element)
+}
+
+function killPlayer(ray) {
+		 const hit = 
+			    ray.x < G.player.x + G.player.width  &&
+   				ray.x + ray.width > G.player.x  &&
+			    ray.y < G.player.y +G.player.height &&
+			    ray.y + ray.height > G.player.y;
+                    if (hit) {
+                    ray.element.remove();// Todo later:
+					alert("failed")
+                    return
+                }
+	
+}
+function hitShield(b) {
+    for (let py = b.y+b.height; py >=  b.y + b.height/2; py--) {
+        for (let px = b.x; px <= b.x + b.width/2; px++) {
+            const key = `${px},${py}`;
+            if (G.bricks.has(key)) {
+                G.bricks.get(key).remove();
+                G.bricks.delete(key);
+                b.element.remove();
+					G.rays.splice(G.rays.indexOf(b), 1)	
+                    return true;
+            }
+        }
+    }
 }
 
 
@@ -69,38 +96,37 @@ function destroyShield(ray) {
 }
 
 function overridShields(mob) {
-	for (let shield of G.shields) {
-			for (let brick of shield.bricks) {
+			for (let brick of G.bricks) { // must update to handle map
 					if ( ( (brick.x+3) >=  mob.x &&  (brick.x+3) <= mob.x+48) && ( (brick.y+3) >=  mob.y &&  (brick.y+3) <= mob.y+32)) {
-						shield.bricks.splice(shield.bricks.indexOf(brick), 1)
+						shield.bricks.splice(G.bricks.indexOf(brick), 1)
 						brick.element.remove()
 
 					}
 			}
-	}	
 }
 
 
-export function  movRays() {
+export function  moveRays() {
+	let i = 0 
 	for (let ray of G.rays ) {
 			if ( ((ray.y+20)+ 4) > 600 ) { 
-				destroyRay(ray, "red")
-				return 
+			//	destroyRay(ray, "red")
+				G.rays.splice(i, 1)
+				i++
+				ray.element.remove()
+				continue 
+				//return 
 			}
-			if (destroyShield(ray)) {
+			if (hitShield(ray) || killPlayer(ray)) {
 					return 
 			} 
-			ray.y += 4
-			ray.id = ((ray.id+1)%5) || 1
-			ray.element.classList.remove(ray.col)
-			ray.element.style.backgroundImage = "url(assets/"+ray.name+ray.id+".png)"
-			ray.element.classList.add(ray.col)
+			ray.y += 3
 			ray.element.style.transform =  `translate(${ray.x}px, ${ray.y}px)`	
+			i++
 	} 
 }
 
 function  destroyRay(ray, col) {
-		G.rays.splice(G.rays.indexOf(ray), 1)
 		ray.element.remove()
 		let exp = document.createElement("div")
 		exp.classList.add("ray_exp")
@@ -127,8 +153,9 @@ export function  cleanRays() {
 		
 }
 
-export   function moveMobs() {
-		let xOffset = ( 5* G.direction) 
+export   function moveMobs(xOffset) {
+		xOffset *= G.direction
+	//	let xOffset = ( 5* G.direction) 
 		let yOffset = 20
 		let swip = false	
 
@@ -161,7 +188,7 @@ export   function moveMobs() {
 			
 				for (let mob of row[0]) {
 					if (!mob.move(yOffset, "y", G.playGround.height) && mob.alive) {
-						alert("game Over")
+						console.log("game Over")
 					}
 					
 			   }

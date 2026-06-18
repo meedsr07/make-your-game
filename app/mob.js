@@ -1,8 +1,6 @@
 
 
 
-
-
 export class Mob {
 	
 	constructor(specie, x, y, width, height) {
@@ -47,7 +45,6 @@ export class Mob {
 		return true 	
 
 	}
-	
 
 
 

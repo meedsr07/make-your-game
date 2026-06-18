@@ -35,7 +35,7 @@ let frags = document.createDocumentFragment()
 			let brickY = y+ r * 6 
 			div.style.transform = `translate(${brickX}px, ${brickY}px)`
 			frags.append(div)
-			G.bricks.set({brickX, brickY} , div) 
+			G.bricks.set(`${brickX},${brickY}` , div) 
 			
     }
   }

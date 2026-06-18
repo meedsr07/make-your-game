@@ -6,14 +6,14 @@ export function spawnPlayer() {
     player.id = 'playership'
     gamebox.element.append(player)
 
-    
-    const playerSize = 50;
-
-    const x = G.playGround.width/8 - playerSize/2;
-
-    const y = G.playGround.height - playerSize;
+	let height = 25 
+	let	width = 50 
+    const x = G.playGround.width/8 - width/2 
+    const y = G.playGround.height - height;
 
     G.player = {
+		width,
+		height,
         element: player,
         x: x,
         y: y,
@@ -56,11 +56,12 @@ export function spawenBullet() {
     bullet.id = 'bullet'
     gamebox.append(bullet)
     let shipX = G.player.x + 22
-    let shipY = G.player.y
-    G.bullet = ({ element: bullet, x: shipX, y: shipY, speed: 10 })
+    let shipY = G.player.y+10
+    G.bullet = ({ element: bullet, x: shipX, y: shipY, speed: 4, height: 10, width: 10 })
     bullet.style.position = 'absolute'
-    bullet.style.left = `${shipX}px`
-    bullet.style.top = `${shipY}px`
+    bullet.style.left = `0px`
+    bullet.style.top = `0px`
+	bullet.style.transform = `translate(${shipX}px, ${shipY}px)`
 
 }
 
@@ -71,10 +72,12 @@ export function updateBullets() {
 
         G.bullet.y -= G.bullet.speed;
         // update the position of the bullet
-        G.bullet.element.style.top = G.bullet.y + "px";
+        G.bullet.element.style.transform  = `translate(${G.bullet.x}px, ${G.bullet.y}px)`
 
         if (G.bullet.y < 0) {
             // remove the bullet from the array
+
+			G.bullet.element.style.display = "none"
             G.bullet = null
         }
 }
@@ -108,6 +111,7 @@ document.addEventListener("keyup", (event) => {
     }
 
 })
+
 
 
 

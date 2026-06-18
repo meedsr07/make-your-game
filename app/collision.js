@@ -4,8 +4,10 @@ import { gamePlay as G } from "./state.js";
 export function checkBulletEnemyCollision() {
 		if (!G.bullet) return 	
 		let bullet = G.bullet 
+		if (hitShield(bullet)  ) {
+            return 
+        }
         // get the position of the bullet part of the screen
-        const bulletRect = bullet.element.getBoundingClientRect();
         // loop  in  enemies in the G.spawnedMobs array  
         for (let r = 0; r < G.spawnedMobs.length; r++) {
             let row = G.spawnedMobs[r][0];
@@ -14,23 +16,21 @@ export function checkBulletEnemyCollision() {
             for (let m = 0; m < row.length; m++) {
 				
                 let enemy = row[m];
-				console.log(enemy)
-                // if (!enemy || !enemy.element) continue;
+                if (!enemy.alive) continue;
 
-                const enemyRect = enemy.element.getBoundingClientRect(); // this must be removed 
                 // check if the bullet rectangle intersects with the enemy rectangle
-                const hit =
-                    bulletRect.left < enemyRect.right &&
-                    bulletRect.right > enemyRect.left &&
-                    bulletRect.top < enemyRect.bottom &&
-                    bulletRect.bottom > enemyRect.top;
+				 const hit = 
+			    G.bullet.x < enemy.x + enemy.width  &&
+   				G.bullet.x + G.bullet.width > enemy.x  &&
+			    G.bullet.y < enemy.y + enemy.height &&
+			    G.bullet.y + G.bullet.height > enemy.y;
+                    if (hit) {
 
-                if (hit) {
                     // remove DOM elements
                     bullet.element.remove();
 
                     enemy.kill();
-
+					G.aliveMobs--
                     // remove from arrays
                     G.bullet = null;
                    // row.splice(m, 1);
@@ -45,7 +45,40 @@ export function checkBulletEnemyCollision() {
 }
 
 
-export function Score() {
+/* function hitRays(b) {
+	
+	for (let j = 0 ; j < G.rays.length ; j++ ) {
+			let ray = G.rays[j]
+			if ( b.x >= ray.x && ray.x <= (ray.x + ray.width/2) && b.y <= ray.y  ) {
+					b.element.remove();
+					ray.element.remove()
+					G.rays.splice(j, 1)	
+			} 
+	} 
+    
+}*/
+
+
+function hitShield(b) {
+
+    for (let py = b.y; py <= b.y + b.height/2; py++) {
+        for (let px = b.x; px <= b.x + b.width/2; px++) {
+            const key = `${px},${py}`;
+            if (G.bricks.has(key)) {
+                G.bricks.get(key).remove();
+                G.bricks.delete(key);
+                b.element.remove();
+				if (b.sign) {
+					G.rays.splice(b, 1)	
+				} else {
+	            	G.bullet = null;
+				}
+                    return true;
+            }
+        }
+    }
+}
+/* export function Score() {
     const Score = document.createElement('div')
     Score.id = 'score'
     Score.textContent = 'Score : 0'
@@ -67,4 +100,4 @@ function updateScore(enemy) {
 
     const score = document.getElementById('score');
     score.textContent = `Score : ${G.currentScore}`;
-}
+}*/
