@@ -9,9 +9,9 @@ export const gamePlay = {
 		bricks: new Map(), 
 		direction: 1,
 		rays: [],
-		functionsQueue: [],
+		shots: 0,
 		expQueue: [],
-		mobs : [{name: "squid_", points: 30, ufo: false}, {name: "crab_", points: 20, ufo : false}, {name: "octpus_", points: 10, ufo : false}, {name: "ufo_", points: 150, ufo : true}]
+		mobs : [{name: "squid_", points: 30}, {name: "crab_", points: 20}, {name: "octpus_", points: 10}, {name: "ufo_", points: 150, isUfo : true}]
 }
 
 

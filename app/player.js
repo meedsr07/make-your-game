@@ -53,6 +53,7 @@ export function spawenBullet() {
     const gamebox = G.playGround.element  
     if (G.bullet) return
     const bullet = document.createElement('div')
+G.shots ++ 
     bullet.classList.add('bullet')
     gamebox.append(bullet)
     let shipX = G.player.x + 25

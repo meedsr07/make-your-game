@@ -83,6 +83,12 @@ p {
 	height: 40px;
 }
 
+.ufo_1 {
+	background-image: url("assets/ufo_1.png");  
+	width: 60px;
+	height: 40px;
+}
+
 .crab_1 {
 	background-image: url("assets/crab_1.png"); 
 	filter : brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(3000%) hue-rotate(260deg) brightness(100%) contrast(100%);

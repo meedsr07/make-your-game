@@ -3,7 +3,7 @@
 
 export class Mob {
 	
-	constructor(specie, x, y, width, height) {
+	constructor(specie, x, y, width = 40, height = 40) {
 
 		// dom elment 
 		let div = document.createElement("div")	
@@ -18,9 +18,10 @@ export class Mob {
 		this.element = div 
 		this.x = x
 		this.y = y
-		this.width = 40
-		this.height = 40 
+		this.width =  width 	
+		this.height = height 
 		this.alive = true
+		
 	}
 
 
@@ -30,15 +31,14 @@ export class Mob {
 	move(offset, axis, max) {
 
 		this[axis] += offset 
-		if (this.image === 1 ) {
+		if (this.image === 1  && (!this.specie.isUfo) ) {
 			this.element.classList.replace(this.specie.name+this.image, this.specie.name+2)  
 			this.image = 2
-		} else {
+		} else  if  (!this.specie.isUfo)  {
 			this.element.classList.replace(this.specie.name+this.image, this.specie.name+1)  
 			this.image = 1 
 		}
 		this.element.style.transform = `translate(${this.x}px, ${this.y}px)`
-
 	}
 
 

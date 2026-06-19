@@ -50,9 +50,7 @@ export function checkBulletEnemyCollision() {
 
                     enemy.kill();
 					G.aliveMobs--
-			G.ufo = null
                     G.bullet = null;
-			   }
 
 	}
 }
