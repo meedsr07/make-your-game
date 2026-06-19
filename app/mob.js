@@ -24,12 +24,11 @@ export class Mob {
 	}
 
 
-
+	canMove(offset, axis, max) {
+		return  this[axis]+offset+this.width <=  max &&  this[axis]+offset >=  0  
+	}
 	move(offset, axis, max) {
 
-		if (this[axis]+offset+this.width >= max || this[axis]+offset <=  0  ){
-				return false 
-		}
 		this[axis] += offset 
 		if (this.image === 1 ) {
 			this.element.classList.replace(this.specie.name+this.image, this.specie.name+2)  
@@ -40,15 +39,13 @@ export class Mob {
 		}
 		this.element.style.transform = `translate(${this.x}px, ${this.y}px)`
 
-		return true 	
-
 	}
 
 
 
 
 	kill() {
-			this.element.remove() 
+			this.element.style.opacity = "0" 
 			this.alive = false
 			//spawn exp image just replace background image and append to cleaning quene  
 	}

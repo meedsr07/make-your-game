@@ -159,42 +159,48 @@ export   function moveMobs(xOffset) {
 	//	let xOffset = ( 5* G.direction) 
 		let yOffset = 20
 		let swip = false	
-
-		for (let row of G.spawnedMobs) {
-			let index  = 0 
-			if (G.direction > 0) {
+		let index  = 0 
+		if (G.direction > 0) {
 				index = 1
-			}
+		}
+	outer :	for (let row of G.spawnedMobs) {
+			
 		
 			for (let mob of row[index]) {
 		
-					
-					
-				if (!mob.move(xOffset, "x", G.playGround.width) && mob.alive) {
+				if (!mob.alive) continue 		
+				//  the method return true if it actually didnt hall wall and move nside the method 	
+				if (!mob.canMove(xOffset, "x", G.playGround.width)) { 
 						swip = true 
-						break
-				} 	
+						break outer 
+					
+				} 
+				break
 				overridShields(mob)
 
 			}
 		
 		}
-		if (swip) {
-				if (G.direction === 1) {
-					G.direction = -1 
-				} else {
-					G.direction = 1
-				}
-			for (let row of G.reversedMobs) {
+	if (swip) {
+		G.direction *= -1
+	}
+	for (let row of G.spawnedMobs) {
 			
-				for (let mob of row[0]) {
-					if (!mob.move(yOffset, "y", G.playGround.height) && mob.alive) {
-						console.log("game Over")
-					}
-					
-			   }
+		
+			for (let mob of row[index]) {
+		
+				if (!swip) { 
+					mob.move(xOffset, "x", G.playGround.width)
+				} else {
+					mob.move(yOffset, "y", G.playGround.height)
+				} 
+				overridShields(mob)
+
 			}
-		} 
+		
+		}
+
+		 
 }
 
 
