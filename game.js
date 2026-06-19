@@ -119,11 +119,22 @@ export function  moveRays() {
 				continue 
 				//return 
 			}
-			if (hitShield(ray) || killPlayer(ray)) {
+			if (hitShield(ray) || killPlayer(ray) || hitBullet(ray, i)) {
 					continue 
 			} 
 			ray.y += 3
 			ray.element.style.transform =  `translate(${ray.x}px, ${ray.y}px)`	
+	} 
+}
+
+function hitBullet(ray, i ) {
+	if (!G.bullet) return 
+	if (ray.y + ray.height <= G.bullet.y+G.bullet.height && ray.y + ray.height >= G.bullet.y   && ray.x === G.bullet.x) {
+		G.rays.splice(i, 1)
+			
+		ray.element.remove()
+		G.bullet.element.remove()
+		G.bullet = null
 	} 
 }
 
