@@ -11,13 +11,13 @@ export function checkBulletEnemyCollision() {
         // loop  in  enemies in the G.spawnedMobs array  
         for (let r = 0; r < G.spawnedMobs.length; r++) {
             let row = G.spawnedMobs[r][0];
-			let rowR = G.spawnedMobs[r][1];
+			
 
             for (let m = 0; m < row.length; m++) {
 				
                 let enemy = row[m];
                 if (!enemy.alive) continue;
-
+                
                 // check if the bullet rectangle intersects with the enemy rectangle
 				 const hit = 
 			    G.bullet.x < enemy.x + enemy.width  &&

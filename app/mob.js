@@ -21,7 +21,6 @@ export class Mob {
 		this.width =  width 	
 		this.height = height 
 		this.alive = true
-		
 	}
 
 

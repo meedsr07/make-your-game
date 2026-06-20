@@ -29,6 +29,9 @@ export  function shot() {
 	G.playGround.element.appendChild(ray.element)
 }
 
+
+
+
 function killPlayer(ray) {
 		 const hit = 
 			    ray.x < G.player.x+6 + G.player.width-6  &&
@@ -42,6 +45,8 @@ function killPlayer(ray) {
                 }
 	
 }
+
+
 function hitShield(b) {
     for (let py = b.y+b.height; py >=  b.y + b.height/2; py--) {
         for (let px = b.x; px <= b.x + b.width/2; px++) {

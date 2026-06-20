@@ -16,10 +16,11 @@ const timers =  {
 }
 
 let start = 0
+let animationId = null
 
 function startGame() {	
 	G.score  = document.createElement("p") 
-	G.textContent = 0 
+	G.score.textContent = 0 
 	G.playGround.element  = document.createElement("div") 
 	G.playGround.element.id = "container"
 	G.playGround.element.appendChild(G.score)
@@ -30,9 +31,24 @@ function startGame() {
 
 	spawnShields()
 	player.spawnPlayer()
-	requestAnimationFrame(gameLoop)
-	
+	requestAnimationFrame(gameLoop)	
 }
+
+
+function pause() {
+	// add pause state 
+	cancelAnimationFram(animationId)
+	// add a counter to get paused time
+	animationId = null
+}
+
+function resume() {
+	for (let  val of timers.values ) {
+		val.lastTime = performance.now()
+	}	
+	animationId = requestAnimationFrame(gameLoop)
+}
+
 
 
  
@@ -42,8 +58,8 @@ function gameLoop(timestamp) {
 	timers.moveMobs.edit(interval)
 	cleanExps(timestamp) 
 	moveRays()
-    player.updateBullets();
-    checkBulletEnemyCollision();
+	player.updateBullets();
+    	checkBulletEnemyCollision();
 	if (keysstate.bullet) {
 		player.spawenBullet()
 		keysstate.bullet = false
@@ -71,7 +87,7 @@ function gameLoop(timestamp) {
 		}
 	}
 	G.score.textContent = (timestamp-start) / 1000
-	requestAnimationFrame(gameLoop)
+	animationId = requestAnimationFrame(gameLoop)
 }
 
 
