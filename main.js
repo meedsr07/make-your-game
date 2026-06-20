@@ -3,9 +3,19 @@ import { gamePlay as G, keysstate } from "./app/state.js"
 import {spawnMobs, spawnShields, spawenUfo, moveUfo } from "./app/scene.js"
 import * as player  from "./app/player.js"
 import { checkBulletEnemyCollision } from "./app/collision.js";
+import { Timer } from "./app/timer.js";
 
 
 
+
+const timers =  {
+	moveMobs: new Timer(800),
+	moveUfo: new Timer(50),
+	shotMob: new Timer(1500),
+	spawenUfo: new Timer((1500 + Math.random() * 1500), true)
+}
+
+let start = 0
 
 function startGame() {	
 	G.score  = document.createElement("p") 
@@ -25,62 +35,41 @@ function startGame() {
 }
 
 
-let moveInterval = 800 
-let lastFrame = 0 
-let ufoInterval  = 100 
-let shots  = 0  
-let ufoTimer = 0 
-let shotInterval = 1200 
-let lastTime = 0 
-let lastShot = 0
-let delayTimer = 0 
-let delay = 15000 + Math.random() * 15000 
-let start = 0 
+ 
 function gameLoop(timestamp) {
 	const { interval, step } = getSpeed()	
-	
-	if (!lastTime) {
-		delayTimer =  lastShot = start = lastTime = lastFrame =  ufoTimer = timestamp 	
-	}
-	const delta = timestamp-lastFrame
-	
-	if (timestamp-lastShot >= shotInterval) {
-		shot()
-		lastShot = timestamp
-	}
-	if (timestamp-lastTime >= interval) {
-		moveMobs(step)
-		lastTime = timestamp
-	}
-	if (timestamp-ufoTimer >= ufoInterval) { 
-		if (G.ufo) {
-			moveUfo()
-		}
-		ufoTimer = timestamp
-	}
+	if (!start) start = timestamp
+	timers.moveMobs.edit(interval)
+	cleanExps(timestamp) 
+	moveRays()
+    player.updateBullets();
+    checkBulletEnemyCollision();
 	if (keysstate.bullet) {
 		player.spawenBullet()
 		keysstate.bullet = false
-	}
-	if (timestamp-delayTimer >= delay) {
-		if (!G.ufo && G.shots >= 10) {
-			spawenUfo()
-			G.shots = 0
-		}	
-		delay = 15000 + Math.random() * 15000 
-		delayTimer = timestamp
-	}
+	}	
     if (keysstate.left) {
         player.moveLeft()
     }
     if (keysstate.right) {
         player.moveRight()
     }
-	cleanExps(delta) 
-	moveRays()
-    player.updateBullets();
-    checkBulletEnemyCollision();
-   	lastFrame = timestamp  
+		
+	if (timers.moveMobs.tick(timestamp)) {
+		moveMobs(step)	
+	}
+	if (timers.shotMob.tick(timestamp)) {
+		shot()	
+	}
+	if (timers.moveUfo.tick(timestamp)) {
+		moveUfo()	
+	}
+	if ( !G.ufo && timers.spawenUfo.tick(timestamp)) {
+		if (G.shots >= 10) {
+			spawenUfo()	
+			G.shots = 0
+		}
+	}
 	G.score.textContent = (timestamp-start) / 1000
 	requestAnimationFrame(gameLoop)
 }

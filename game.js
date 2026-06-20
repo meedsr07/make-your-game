@@ -58,42 +58,6 @@ function hitShield(b) {
 }
 
 
-function destroyShield(ray) {
-		let shield = null 
-		let head = {x: ray.x+10, y: ray.y+20  } 
-		
-		for (let sh of G.shields) {
-				if ( Math.abs(sh.x-head.x) <= (6 * 6) &&  Math.abs(sh.y-head.y) <= (6*4)  ) {
-						shield = sh 
-						break 
-				}
-		}
-		if (!shield) {
-				return 
-		}
-		let queue = [] 
-		let makeExp = false
-		 for (let brick of shield.bricks) {
-				if ( Math.abs((brick.x+3)-head.x) <= 8   &&  Math.abs((brick.y+3)-(head.y)) <= 16 ) {
-				if (Math.abs((brick.x+3)-head.x) <= 3  &&  Math.abs((brick.y+3)-(head.y)) <= 10    ) {
-						makeExp = true
-						
-				}
-					queue.push(brick) 
-				}
-		 }
-		if (makeExp === true) {
-				destroyRay(ray, "green")
-				for (let br of queue) {
-						shield.bricks.splice(shield.bricks.indexOf(br), 1)
-						br.element.remove()
-					
-				} 
-		} else {
-			return false
-		}
-		return true 	
-}
 
 function overridShields(mob) {
 			if (!mob.alive) return 
@@ -138,21 +102,16 @@ function hitBullet(ray, i ) {
 	} 
 }
 
-function  destroyRay(ray, col) {
-	}
 
-
-export function  cleanExps(delta) {
-	console.log(G.exps)
+export function  cleanExps(timestamp) {
 	for (let i = G.exps.length-1;  i >= 0    ; i--) {
 
 		let exp = G.exps[i]
 
-		exp.timer -= delta	
-		if (exp.timer <= 0 ) {
+		
+		if (exp.timer.tick(timestamp) ) {
 			exp.element.remove()
 			G.exps.splice(i, 1)
-
 		}
 	}	
 				

@@ -3,7 +3,6 @@
 export const gamePlay = {
 		playGround: {width: 800, height: 600},
 		player: {},	
-	//	bullet:  {active: false, x: 0, y: 0, element: null},
 		spawnedMobs: [],
 		aliveMobs: 55,
 		bricks: new Map(), 
@@ -11,7 +10,7 @@ export const gamePlay = {
 		rays: [],
 		shots: 0,
 		exps: [],
-		mobs : [{name: "squid_", points: 30}, {name: "crab_", points: 20}, {name: "octpus_", points: 10}, {name: "ufo_", points: 150, isUfo : true}]
+		mobs : [{name: "squid_", col: "cyan", points: 30}, {name: "crab_", col: "violet", points: 20}, {name: "octpus_", col: "green", points: 10}, {name: "ufo_", points: 150, col: "red", isUfo : true}]
 }
 
 

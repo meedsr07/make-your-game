@@ -1,22 +1,21 @@
 
-/*.violet {
-	}
+.violet {
+	filter : brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(3000%) hue-rotate(260deg) brightness(100%) contrast(100%);
+}
 
 .green {
-   
+   	filter : brightness(0) saturate(100%) invert(48%) sepia(98%) saturate(1000%) hue-rotate(80deg) brightness(100%) contrast(100%);
 }
 
 .cyan {
-    }
+   	filter : brightness(0) saturate(100%) invert(84%) sepia(35%) saturate(5146%) hue-rotate(140deg) brightness(101%) contrast(101%); 
+}
 
 .yellow {
    filter : brightness(0) saturate(100%) invert(90%) sepia(90%) saturate(1000%) hue-rotate(0deg) brightness(105%) contrast(105%);
 
 }
 
-.red {
-    filter: brightness(0) saturate(100%) invert(15%) sepia(100%) saturate(7000%) hue-rotate(0deg) brightness(100%) contrast(110%);
-}*/
 
 * {
 	box-sizing: border-box;
@@ -37,7 +36,6 @@ body {
 
 p {
 	position: absolute;
-
 	display: "none";
 	color: white;
 }
@@ -47,6 +45,18 @@ p {
 	width: 6px;
 }
 
+.ufo_exp {
+	background-image: url("assets/ufo_exp.png") ; 
+	position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
+    background-position: center;
+	width: 60px;
+	height: 40px;
+
+}
 .crab_exp, .squid_exp, .octpus_exp {
 	background-image: url("assets/exp.png") ; 
 	position: absolute;
@@ -73,14 +83,12 @@ p {
 
 .squid_1 {
 	background-image: url("assets/squid_1.png"); 
-	filter : brightness(0) saturate(100%) invert(84%) sepia(35%) saturate(5146%) hue-rotate(140deg) brightness(101%) contrast(101%);
 	width: 40px;
 	height: 40px;
 }
 
 .squid_2 {
 	background-image: url("assets/squid_2.png");  
-	filter : brightness(0) saturate(100%) invert(84%) sepia(35%) saturate(5146%) hue-rotate(140deg) brightness(101%) contrast(101%);
 	width: 40px;
 	height: 40px;
 }
@@ -93,27 +101,23 @@ p {
 
 .crab_1 {
 	background-image: url("assets/crab_1.png"); 
-	filter : brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(3000%) hue-rotate(260deg) brightness(100%) contrast(100%);
 	width: 40px;
 	height: 40px;
 }
 
 .crab_2 {
 	background-image: url("assets/crab_2.png"); 
-	filter : brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(3000%) hue-rotate(260deg) brightness(100%) contrast(100%);
 	width: 40px;
 	height: 40px;
 }
 .octpus_1 {
 	background-image: url("assets/octpus_1.png");  
-	filter : brightness(0) saturate(100%) invert(48%) sepia(98%) saturate(1000%) hue-rotate(80deg) brightness(100%) contrast(100%);
 	width: 40px;
 	height: 40px;
 }
 
 .octpus_2 {
 	background-image: url("assets/octpus_2.png");  
-	filter : brightness(0) saturate(100%) invert(48%) sepia(98%) saturate(1000%) hue-rotate(80deg) brightness(100%) contrast(100%);
 	width: 40px;
 	height: 40px;
 }
@@ -129,6 +133,7 @@ p {
 	width: 20px;
 	height: 20px;
 }
+
 .alien {
 	position: absolute;
     background-repeat: no-repeat;
@@ -138,6 +143,7 @@ p {
     background-position: center;
 
 }
+
 #playership {
     width: 50px;
     height: 25px;
@@ -159,22 +165,4 @@ p {
     background-repeat: no-repeat;
     background-position: center;
 }
-#score {
-    position: absolute;
-    top: 20px;
-    left: 20px;
 
-    color: white;
-    font-size: 24px;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-
-    padding: 10px 15px;
-
-    border: 2px solid white;
-    border-radius: 5px;
-
-    background-color: rgba(0, 0, 0, 0.5);
-
-    user-select: none;
-}

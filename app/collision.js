@@ -60,18 +60,6 @@ export function checkBulletEnemyCollision() {
 }
 
 
-/* function hitRays(b) {
-	
-	for (let j = 0 ; j < G.rays.length ; j++ ) {
-			let ray = G.rays[j]
-			if ( b.x >= ray.x && ray.x <= (ray.x + ray.width/2) && b.y <= ray.y  ) {
-					b.element.remove();
-					ray.element.remove()
-					G.rays.splice(j, 1)	
-			} 
-	} 
-    
-}*/
 
 
 function hitShield(b) {
@@ -83,36 +71,9 @@ function hitShield(b) {
                 G.bricks.get(key).element.remove();
                 G.bricks.delete(key);
                 b.element.remove();
-				if (b.sign) {
-					G.rays.splice(b, 1)	
-				} else {
-	            	G.bullet = null;
-				}
-                    return true;
+	            G.bullet = null;
+                return true;
             }
         }
     }
 }
-/* export function Score() {
-    const Score = document.createElement('div')
-    Score.id = 'score'
-    Score.textContent = 'Score : 0'
-    document.body.append(Score)
-}
-
-function updateScore(enemy) {
-    if (enemy.name === "squid") {
-        G.currentScore += 25;
-    }
-
-    if (enemy.name === "crab") {
-        G.currentScore += 15;
-    }
-
-    if (enemy.name === "octpus") {
-        G.currentScore += 10;
-    }
-
-    const score = document.getElementById('score');
-    score.textContent = `Score : ${G.currentScore}`;
-}*/
