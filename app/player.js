@@ -1,15 +1,15 @@
 import { gamePlay as G, keysstate } from "./state.js";
 // create the player and set the initial position of the player
 export function spawnPlayer() {
-    const gamebox = G.playGround 
+    const gamebox = G.playGround
     const player = document.createElement('div')
     player.id = 'playership'
     gamebox.element.append(player)
 
 	let height = 25 
 	let	width = 50 
-    const x = G.playGround.width/8 - width/2 
-    const y = G.playGround.height - height;
+    const x = G.playGround.width/2 - width/2 
+    const y = G.playGround.height - height -5;
 
     G.player = {
 		width,
@@ -22,8 +22,7 @@ export function spawnPlayer() {
 
     player.style.position = "absolute";
     player.classList.add("cyan")
-    player.style.left = `0px`;
-    player.style.top = `0px`;
+
 	G.player.element.style.transform = `translate(${G.player.x}px, ${G.player.y}px)`;
 
 }
@@ -43,12 +42,13 @@ function updatePlayer() {
     if (G.player.x < 0) {
         G.player.x = 0;
     }
-    if (G.player.x > 750) {
-        G.player.x = 750;
+    if (G.player.x > G.playGround.width  - G.player.width) {
+        G.player.x = G.playGround.width  - G.player.width;
     }
     // update the position of the player
     G.player.element.style.transform = `translate(${G.player.x}px, ${G.player.y}px)`;
 }
+
 export function spawenBullet() {
     const gamebox = G.playGround.element  
     if (G.bullet) return
@@ -60,8 +60,6 @@ export function spawenBullet() {
 	let shipY = G.player.y+10
     G.bullet = ({ element: bullet, x: shipX, y: shipY, speed: 6, height: 10, width: 10 })
     bullet.style.position = 'absolute'
-    bullet.style.left = `0px`
-    bullet.style.top = `0px`
 	bullet.style.transform = `translate(${shipX}px, ${shipY}px)`
 
 }
