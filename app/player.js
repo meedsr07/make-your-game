@@ -51,6 +51,7 @@ function updatePlayer() {
 
 export function spawenBullet() {
     const gamebox = G.playGround.element  
+    // if there is a bullte  return 
     if (G.bullet) return
     const bullet = document.createElement('div')
     G.shots ++ 
@@ -65,17 +66,15 @@ export function spawenBullet() {
 }
 
 
-
+// responsible for updating the position of the bullet
 export function updateBullets() {
         if (!G.bullet) return 
 
         G.bullet.y -= G.bullet.speed;
         // update the position of the bullet
         G.bullet.element.style.transform  = `translate(${G.bullet.x}px, ${G.bullet.y}px)`
-
+        // remove the bullet if it goes out of the game box
         if (G.bullet.y < 0) {
-            // remove the bullet from the array
-
 			G.bullet.element.remove()
             G.bullet = null
         }
