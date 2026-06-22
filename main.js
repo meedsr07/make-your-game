@@ -7,7 +7,6 @@ import { Timer } from "./app/timer.js";
 
 
 
-
 const timers =  {
 	moveMobs: new Timer(800),
 	moveUfo: new Timer(50),
@@ -16,43 +15,30 @@ const timers =  {
 }
 
 let start = 0
-let animationId = null
 
-function startGame() {	
-	G.score  = document.createElement("p") 
-	G.score.textContent = 0 
-	G.playGround.element  = document.createElement("div") 
-	G.playGround.element.id = "container"
-	G.playGround.element.appendChild(G.score)
-	
+export var animationId = null
+export function startGame() {
+	G.time  = document.querySelector("#ui #time")
+	G.textContent = 0 
+	G.playGround.element  = document.querySelector("#ui #container")
 	spawnMobs()
-
-	document.body.appendChild(G.playGround.element)
-
 	spawnShields()
 	player.spawnPlayer()
-	requestAnimationFrame(gameLoop)	
-}
-
-
-function pause() {
-	// add pause state 
-	cancelAnimationFram(animationId)
-	// add a counter to get paused time
-	animationId = null
-}
-
-function resume() {
-	for (let  val of timers.values ) {
-		val.lastTime = performance.now()
-	}	
 	animationId = requestAnimationFrame(gameLoop)
 }
 
 
+export function startLoop() {
+    cancelAnimationFrame(animationId);
+    animationId = requestAnimationFrame(gameLoop);
+}
 
- 
-function gameLoop(timestamp) {
+export function stopLoop() {
+    cancelAnimationFrame(animationId);
+    animationId = null;
+}
+
+export function gameLoop(timestamp) {
 	const { interval, step } = getSpeed()	
 	if (!start) start = timestamp
 	timers.moveMobs.edit(interval)
@@ -86,9 +72,10 @@ function gameLoop(timestamp) {
 			G.shots = 0
 		}
 	}
-	G.score.textContent = (timestamp-start) / 1000
+	G.time.textContent = ((timestamp-start) / 1000).toFixed(3)
 	animationId = requestAnimationFrame(gameLoop)
 }
+
 
 
 function getSpeed() {
@@ -99,5 +86,3 @@ function getSpeed() {
    	 
     return { interval, step }
 }
-
-startGame() 
