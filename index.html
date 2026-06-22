@@ -1,0 +1,65 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/style.css">
+	<link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script  type="module" src="main.js" defer> </script>
+</head>
+<body>
+    <div id="game">
+        <div id="background"></div>
+        <div id="start" class="showFlex">
+            <div class="title">
+                <h1>space invaders</h1>
+                <h3>H-Score: 10000</h3>
+            </div>
+            <div class="zarhouni"></div>
+
+            <div class="keys">
+                <h2>Keys</h2>
+                <h2>moving:</h2>
+                <h2>shoting:</h2>
+            </div>
+            <button id="start-btn">start game</button>
+
+
+        </div>
+        <div id="ui" class="hidden">
+            <div class="table-res">
+                <h2 class="t">500</h2>
+                    <button id="pause-btn"><i class="fa-solid fa-pause"></i></button>
+                <h2 id="time" class="t">03:56</h2>
+            </div>
+			<div id="container"></div>
+        </div>
+        <!-- Pause menu -->
+        <div id="pause-menu" class="hidden">
+            <div class="menu-game">
+                <div class="controls-menu">
+                    <button id="continue-btn">Continue</button>
+                    <button id="restart-btn">Restart</button>
+                    <button id="exit-btn">Exit</button>
+                </div>
+            </div>
+        </div>
+        <div id="gameOver" class="hidden">
+            <h1>Game over</h1>
+            <div class="button-gameover">
+                <button onclick="restart()">Restart</button>
+                <button onclick="Exit()">Exit</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="module" src="app/js.js" ></script>
+<script type="module" src="main.js"></script>
+</html>
