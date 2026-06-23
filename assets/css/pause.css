@@ -1,0 +1,43 @@
+#pause-menu{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left :0;
+    z-index: 100;
+    background-color: rgba(1, 0, 17 , 0.6);
+}
+#pause-menu .menu-game{
+    position: relative;
+    top: calc(50% - 150px);
+    left: calc(50% - 125px);
+    width: 250px;
+    height: 300px;
+    background-color: rgba(91, 91, 91,0.9);
+}
+#pause-menu .menu-game .controls-menu{
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: space-evenly;
+    transition: 0.2s all ease-in-out;
+    & button{
+        all: unset;
+        width: 80%;
+        margin-inline: 10%;
+        padding-block: 15px;
+        background-color: rgba(255, 0, 0, 0.6);
+        color: white;
+        font-size: 30px;
+        text-align: center;
+        transition: 0.2s all ease-in-out;
+        
+        &:hover{
+            color: black;
+            background-color: red;
+            font-size: 32px;
+            font-weight:bold;
+        }
+    }
+}

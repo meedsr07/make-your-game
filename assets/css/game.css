@@ -1,4 +1,42 @@
 
+#ui{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+#ui #container{
+    margin-bottom: 13%;
+}
+
+
+#ui .table-res{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    margin-inline: 5%;
+}
+#ui .table-res button{
+    all: unset;
+    background-color: red;
+    padding: 10px;
+    color:white;
+    transition: 0.2s all ease-in-out;
+}
+#ui .table-res button:hover{
+    scale: 1.05;
+    background-color: rgb(160, 0, 0);
+}
+
+
+
+/* --------------------------------------------------------------------------------------------------------------------------------- */
+
+
 /*.violet {
 	}
 
@@ -17,7 +55,7 @@
 .red {
     filter: brightness(0) saturate(100%) invert(15%) sepia(100%) saturate(7000%) hue-rotate(0deg) brightness(100%) contrast(110%);
 }*/
-
+   
 * {
 	box-sizing: border-box;
 }
@@ -29,7 +67,7 @@
 
 body {
 	background-color: black;
-  	min-height: 100vh;	 
+    min-height: 100vh;	 
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -47,18 +85,6 @@ p {
 	width: 6px;
 }
 
-.ray_exp {
-	background-image: url("assets/ray_exp.png") ; 
-	 background-size: contain;
-    image-rendering: pixelated;
-	image-rendering: crisp-edges;
-    background-position: center;
-	width: 20px;
-	height: 20px;
-
-}
-
-
 #container {
 	width: 800px;
 	position: relative;
@@ -70,72 +96,67 @@ p {
 }
 
 .squid_1 {
-	background-image: url("assets/squid_1.png"); 
+	background-image: url("./../img/squid_1.png");
+	background-repeat: no-repeat;
 	filter : brightness(0) saturate(100%) invert(84%) sepia(35%) saturate(5146%) hue-rotate(140deg) brightness(101%) contrast(101%);
 	width: 40px;
 	height: 40px;
 }
 
 .squid_2 {
-	background-image: url("assets/squid_2.png");  
+	background-image: url("./../img/squid_2.png");
+	background-repeat: no-repeat;
 	filter : brightness(0) saturate(100%) invert(84%) sepia(35%) saturate(5146%) hue-rotate(140deg) brightness(101%) contrast(101%);
 	width: 40px;
 	height: 40px;
 }
 
 .crab_1 {
-	background-image: url("assets/crab_1.png"); 
+	background-image: url("./../img/crab_1.png");
+	background-repeat: no-repeat;
 	filter : brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(3000%) hue-rotate(260deg) brightness(100%) contrast(100%);
 	width: 40px;
 	height: 40px;
 }
 
 .crab_2 {
-	background-image: url("assets/crab_2.png"); 
+	background-image: url("./../img/crab_2.png");
+	background-repeat: no-repeat;
 	filter : brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(3000%) hue-rotate(260deg) brightness(100%) contrast(100%);
 	width: 40px;
 	height: 40px;
 }
 .octpus_1 {
-	background-image: url("assets/octpus_1.png");  
+	background-image: url("./../img/octpus_1.png");
+	background-repeat: no-repeat;
 	filter : brightness(0) saturate(100%) invert(48%) sepia(98%) saturate(1000%) hue-rotate(80deg) brightness(100%) contrast(100%);
 	width: 40px;
 	height: 40px;
 }
 
 .octpus_2 {
-	background-image: url("assets/octpus_2.png");  
+	background-image: url("./../img/octpus_2.png");
+	background-repeat: no-repeat; 
 	filter : brightness(0) saturate(100%) invert(48%) sepia(98%) saturate(1000%) hue-rotate(80deg) brightness(100%) contrast(100%);
 	width: 40px;
 	height: 40px;
 }
 
 
-.ray {
-	position: absolute;
-    background-repeat: no-repeat;
-    background-size: contain;
-    image-rendering: pixelated;
-	image-rendering: crisp-edges;
-    background-position: center;
-	width: 20px;
-	height: 20px;
-}
 .alien {
 	position: absolute;
     background-repeat: no-repeat;
     background-size: contain;
 	image-rendering: pixelated;
-	image-rendering: crisp-edges;
+
     background-position: center;
 
 }
 #playership {
     width: 50px;
     height: 25px;
-    background-image: url("assets/player.png");
+    background-image: url("./../img/player.png");
 	image-rendering: pixelated;
-	image-rendering: crisp-edges;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -144,11 +165,9 @@ p {
 .bullet {
 	width: 10px;
 	height: 10px; 
-	background-image:  url('assets/bullet_player.png');
+	background-image:  url('./../img/bullet_player.png');
 	image-rendering:  pixelated;
-	image-rendering: crisp-edges;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 }
-

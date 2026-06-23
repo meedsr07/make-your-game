@@ -83,6 +83,5 @@ function getSpeed() {
     
     const interval = 100 + (700 * ratio)  
     const step =  (5+ 20 ) //Math.floor(5 + (20 * (1 - ratio))) 
-   	 
-    return { interval, step }
+	return { interval, step }
 }

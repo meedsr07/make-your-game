@@ -40,7 +40,7 @@ function killPlayer(ray) {
 			    ray.y + ray.height > G.player.y;
                     if (hit) {
                     ray.element.style.display = "none";// Todo later:
-					alert("failed")
+					// alert("failed")
                     return
                 }
 	
