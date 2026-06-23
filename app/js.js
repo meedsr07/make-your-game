@@ -1,5 +1,10 @@
 import {stopLoop , startLoop , startGame} from "../main.js"
+//import gamePlay from "./state.js"
 let statuss = "start"
+
+
+// #start .list-score
+
 
 const startBtn = document.querySelector("#start-btn");
 const pauseBtn = document.querySelector("#pause-btn");

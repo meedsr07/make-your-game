@@ -1,0 +1,96 @@
+
+#start{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-around;
+    height: 100vh;
+}
+
+#start h1{
+    font-size: 120px;
+    text-align: center;
+    font-weight:bold;
+    text-shadow: 7px 7px 0px rgb(138, 138, 138);
+    color: #15ff00;
+    margin-top: 25px;
+    -webkit-text-stroke: 2px black;
+}
+#start .flexed{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 45PX;
+}
+#start .flexed div{
+    opacity: 0;
+    width: 80px;
+    height: 80px;
+    margin-right: 50px;
+    background-size: contain;
+    background-position: center;
+}
+#start .flexed h3{
+    opacity: 0;
+}
+#start .flexed h3 span{
+
+    margin-left: 50px;
+
+}
+#start .list-score .a0 div{
+    animation: a 1s ease forwards;
+    
+}
+#start .list-score .a0 h3{
+    animation: a 1s ease 1s forwards;
+}
+
+
+#start .list-score .a1 div{
+    animation: a 1s ease 2s forwards;
+}
+#start .list-score .a1 h3{
+    animation: a 1s ease 3s forwards;
+}
+
+
+#start .list-score .a2 div{
+    animation: a 1s ease 4s forwards;
+}
+#start .list-score .a2 h3{
+    animation: a 1s ease 5s forwards;
+}
+
+
+#start .list-score .a3 div{
+    animation: a 1s ease 6s forwards;
+}
+#start .list-score .a3 h3{
+    animation: a 1s ease 7s forwards;
+}
+#start button{
+    all: unset;
+    font-size: 70px;
+    margin-bottom:50px;
+    font-weight:bold;
+    transition: 0.3s ease-in-out;
+}
+#start button:hover{
+    scale: 1.1;
+
+    color: #15ff00;
+    font-weight:bold;
+    text-shadow: 7px 7px 0px rgb(138, 138, 138);
+    -webkit-text-stroke: 2px black;
+}
+
+@keyframes a {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
