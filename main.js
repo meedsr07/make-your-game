@@ -8,12 +8,14 @@ import { Timer } from "./app/timer.js";
 
 
 
+
 const timers =  {
 	moveMobs: new Timer(800),
 	moveUfo: new Timer(50),
 	shotMob: new Timer(1500),
 	spawenUfo: new Timer((1500 + Math.random() * 1500), true)
 }
+
 
 let start = 0
 let animationId = null
