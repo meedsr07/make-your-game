@@ -14,7 +14,7 @@ export class Player {
         this.speed = 6
         this.x = G.playGround.width / 2 - this.width / 2
         this.y = G.playGround.height - this.height - 5
-
+        this.lives = 3
 
         this.element = player
 
@@ -44,7 +44,7 @@ export class Player {
     }
 
     spawnBullet() {
-        const bullet = new Bullet(this.x + this.width / 2, this.y);
+        const bullet = new Bullet(this.x - 2 + this.width / 2, this.y);
 
         this.bullets.push(bullet);
     }
@@ -52,8 +52,9 @@ export class Player {
         for (let bullet of this.bullets) {
             bullet.update();
         }
-         this.bullets = this.bullets.filter(bullet => !bullet.dead);
+        this.bullets = this.bullets.filter(bullet => !bullet.dead);
     }
+
 
 }
 

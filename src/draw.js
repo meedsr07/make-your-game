@@ -44,3 +44,14 @@ let frags = document.createDocumentFragment()
 }
 
 
+export function playerExplosion(x, y) {
+    const exp = document.createElement("div");
+
+    exp.classList.add("player_exp");
+    exp.classList.add("cyan");
+    exp.style.transform = `translate(${x}px, ${y -12}px)`;
+
+    G.playGround.element.append(exp);
+
+    return exp;
+}

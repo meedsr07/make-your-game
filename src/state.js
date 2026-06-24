@@ -4,6 +4,8 @@ export const gamePlay = {
 		playGround: {width: 800, height: 600},
 		player: {},	
 		spawnedMobs: [],
+		freezeEnemies: false,
+		playerHit : false,
 		aliveMobs: 55,
 		bricks: [], 
 		direction: 1,
