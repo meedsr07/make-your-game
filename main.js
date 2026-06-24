@@ -1,11 +1,11 @@
 import { moveMobs, shot, moveRays, cleanExps } from "./game.js"
-import { gamePlay as G, keysstate } from "./app/state.js"
-import { spawnMobs, spawnShields, spawenUfo, moveUfo } from "./app/scene.js"
-// import * as player  from "./app/player.js"
-import { checkBulletEnemyCollision } from "./app/collision.js";
-import { Timer } from "./app/timer.js";
-import { Player } from "./app/P.js";
-import { Bullet } from "./app/bullte.js";
+import { gamePlay as G, keysstate } from "./src/state.js"
+import { spawnMobs, spawnShields, spawenUfo, moveUfo } from "./src/scene.js"
+import { Player } from "./src/player.js";
+import { Bullet } from "./src/bullet.js";
+import { checkBulletEnemyCollision } from "./src/collision.js";
+import { Timer } from "./src/timer.js";
+import "./src/input.js";
 
 
 
@@ -63,17 +63,20 @@ function gameLoop(timestamp) {
 	timers.moveMobs.edit(interval)
 	cleanExps(timestamp)
 	moveRays()
-	player.updateBullets();
+	// player.updateBullets();
+	G.player.updateBullets()
 	checkBulletEnemyCollision();
 	if (keysstate.bullet) {
-		player.spawenBullet()
+		G.player.spawnBullet()
 		keysstate.bullet = false
 	}
 	if (keysstate.left) {
-		player.moveLeft()
+
+		G.player.moveLeft()
 	}
 	if (keysstate.right) {
-		player.moveRight()
+
+		G.player.moveRight()
 	}
 
 	if (timers.moveMobs.tick(timestamp)) {

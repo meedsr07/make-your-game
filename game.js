@@ -1,4 +1,4 @@
-import {gamePlay as G}  from "./app/state.js"
+import {gamePlay as G}  from "./src/state.js"
 
 
 
