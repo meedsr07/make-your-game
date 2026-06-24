@@ -47,18 +47,23 @@ function killPlayer(ray) {
 }
 
 
-function hitShield(b) {
-    for (let py = b.y+b.height; py >=  b.y + b.height/2; py--) {
-        for (let px = b.x; px <= b.x + b.width/2; px++) {
-            const key = `${px},${py}`;
-            if (G.bricks.has(key)) {
-                G.bricks.get(key).element.remove();
-                G.bricks.delete(key);
-                b.element.style.display = "none";
-					G.rays.splice(G.rays.indexOf(b), 1)	
-                    return true;
-            }
-        }
+
+function hitShield(bullet) {
+    for (let brick of  G.bricks) {
+        if (!brick.alive) continue
+         const hit =
+                    bullet.x < brick.x + brick.width &&
+                    bullet.x + bullet.width > brick.x &&
+                    bullet.y < brick.y + brick.height &&
+                    bullet.y + bullet.height > brick.y;
+                if (hit) {
+                    brick.alive = false
+                    brick.element.style.opacity = "0"
+                    bullet.element.remove();
+                    G.rays.splice(G.rays.indexOf(bullet), 1)
+                    return true
+                }
+
     }
 }
 
@@ -66,12 +71,11 @@ function hitShield(b) {
 
 function overridShields(mob) {
 			if (!mob.alive) return 
-			for (let [key, brick] of G.bricks) { // must update to handle map
+			for (let brick of G.bricks) { // must update to handle map
 
 					if ( ( (brick.x+3) >=  mob.x &&  (brick.x+3) <= mob.x+40) && ( (brick.y+3) >=  mob.y &&  (brick.y+3) <= mob.y+32)) {
-						G.bricks.delete(key)
 						brick.element.remove()
-
+						brick.alive = false
 					}
 			}
 }

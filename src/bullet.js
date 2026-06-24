@@ -2,7 +2,7 @@ import { gamePlay as G } from "./state.js";
 
 
 export class Bullet {
-    constructor(x, y, speed = 8 ) {
+    constructor(x, y, speed = 6 ) {
 
         this.element = document.createElement("div");
         this.element.classList.add("bullet");

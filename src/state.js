@@ -5,7 +5,7 @@ export const gamePlay = {
 		player: {},	
 		spawnedMobs: [],
 		aliveMobs: 55,
-		bricks: new Map(), 
+		bricks: [], 
 		direction: 1,
 		rays: [],
 		shots: 0,
