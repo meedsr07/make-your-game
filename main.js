@@ -66,26 +66,27 @@ function gameLoop(timestamp) {
 	// player.updateBullets();
 	G.player.updateBullets()
 	checkBulletEnemyCollision();
-	if (keysstate.bullet) {
+	if (!G.playerHit && keysstate.bullet) {
 		G.player.spawnBullet()
 		keysstate.bullet = false
 	}
-	if (keysstate.left) {
+	if (!G.playerHit && keysstate.left) {
 
 		G.player.moveLeft()
 	}
-	if (keysstate.right) {
+	if (!G.playerHit && keysstate.right) {
 
 		G.player.moveRight()
 	}
 
-	if (timers.moveMobs.tick(timestamp)) {
+
+	if (!G.freezeEnemies && timers.moveMobs.tick(timestamp)) {
 		moveMobs(step)
 	}
-	if (timers.shotMob.tick(timestamp)) {
+	if (!G.freezeEnemies && timers.shotMob.tick(timestamp)) {
 		shot()
 	}
-	if (timers.moveUfo.tick(timestamp)) {
+	if (!G.freezeEnemies && timers.moveUfo.tick(timestamp)) {
 		moveUfo()
 	}
 	if (!G.ufo && timers.spawenUfo.tick(timestamp)) {
@@ -94,6 +95,8 @@ function gameLoop(timestamp) {
 			G.shots = 0
 		}
 	}
+
+
 	G.score.textContent = (timestamp - start) / 1000
 	animationId = requestAnimationFrame(gameLoop)
 }

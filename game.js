@@ -41,7 +41,7 @@ function killPlayer(ray) {
 		ray.y + ray.height > G.player.y;
 	if (hit) {
 		G.playerHit = true;
-		G.freezeGame = false;
+		G.freezeEnemies = true;
 		ray.element.remove()
 		G.player.lives--
 		G.player.element.style.display = 'none'
@@ -51,7 +51,7 @@ function killPlayer(ray) {
 			exp.style.display = 'none'
 			G.player.element.style.display = "block";
 			G.playerHit = false;
-			G.freezeGame = false;
+			G.freezeEnemies = false;
 
 		}, 2000);
 	}
