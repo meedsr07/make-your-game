@@ -1,12 +1,12 @@
 import { moveMobs, shot, moveRays, cleanExps } from "./game.js"
-import { gamePlay as G, keysstate } from "./src/state.js"
-import { spawnMobs, spawnShields, spawenUfo, moveUfo } from "./src/scene.js"
-import { Player } from "./src/player.js";
-import { Bullet } from "./src/bullet.js";
-import { checkBulletEnemyCollision } from "./src/collision.js";
-import { Timer } from "./src/timer.js";
-import "./src/input.js";
-import {drawLives} from './src/draw.js'
+import { gamePlay as G, keysstate } from "./app/state.js"
+import { spawnMobs, spawnShields, spawenUfo, moveUfo } from "./app/scene.js"
+import { Player } from "./app/player.js";
+import { Bullet } from "./app/bullet.js";
+import { checkBulletEnemyCollision } from "./app/collision.js";
+import { Timer } from "./app/timer.js";
+import "./app/input.js";
+import {drawLives} from './app/draw.js'
 
 
 

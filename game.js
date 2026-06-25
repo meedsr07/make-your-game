@@ -1,5 +1,5 @@
-import { gamePlay as G } from "./src/state.js"
-import { playerExplosion } from "./src/draw.js"
+import { gamePlay as G } from "./app/state.js"
+import { playerExplosion } from "./app/draw.js"
 // import {drawLives} from './src/draw.js'
 
 
