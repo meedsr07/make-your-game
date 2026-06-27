@@ -65,6 +65,20 @@
 }
 
 
+body {
+	background-color: black;
+    min-height: 100vh;	 
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+p {
+	position: absolute;
+
+	display: "none";
+	color: white;
+}
 
 .brick {
 	height: 6px;
@@ -158,6 +172,7 @@
     background-position: center;
 }
 
+
 .ufo_exp {
 	background-image: url("./../img/ufo_exp.png") ; 
 	position: absolute;
@@ -218,7 +233,5 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-
     image-rendering: pixelated;
-
 }

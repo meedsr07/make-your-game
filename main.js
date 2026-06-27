@@ -30,9 +30,7 @@ export function startGame() {
 	G.time.textContent = 0
 	//G.textContent = 0 
 	G.playGround.element  = document.querySelector("#ui #container")
-	G.livesContainer = document.createElement('div')
-	G.livesContainer.id = "livesContainer"
-	document.querySelector("#ui").append(G.livesContainer);
+	G.livesContainer = document.querySelector("#ui #livesContainer")
 	spawnMobs()
 	spawnShields()
 	G.player = new Player()
