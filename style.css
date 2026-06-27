@@ -27,7 +27,7 @@
 
 
 body {
-    background-color: black;
+    background-color: #0B1026;
     min-height: 100vh;
 
     display: flex;
@@ -209,4 +209,23 @@ p {
 
     image-rendering: pixelated;
     image-rendering: crisp-edges;
+}
+
+#box{
+    width:900px;
+    height:800px;
+
+    display:flex;
+    flex-direction:column;
+
+    padding:20px;
+    gap:20px;
+}
+
+#hud{
+    height:60px;
+}
+
+#game{
+    flex:1;
 }
