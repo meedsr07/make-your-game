@@ -1,37 +1,31 @@
 #start{
     position: relative;
     z-index: 1;
+    height: 100vh;
+    overflow: hidden;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-
-    height: 100vh;
-    overflow: hidden;
 }
 
-/* عنوان اللعبة */
+/* Title */
 #start h1{
+    margin-top: 25px;
+
     font-size: 120px;
     text-align: center;
     font-weight: bold;
     color: #15ff00;
 
-    margin-top: 25px;
-
-    text-shadow:
-        0 0 12px #15ff00,
-        7px 7px 0px rgb(70, 70, 70);
-
     -webkit-text-stroke: 2px black;
+    text-shadow: 7px 7px 0 rgb(70, 70, 70);
 
-    animation:
-        titleDrop .8s ease forwards,
-        titleGlow 1.8s ease-in-out infinite;
+    animation: titleDrop .8s ease forwards;
 }
 
-/* قائمة النقاط */
+/* Score list */
 #start .flexed{
     display: flex;
     align-items: center;
@@ -43,7 +37,6 @@
 
 #start .flexed div{
     opacity: 0;
-
     width: 80px;
     height: 80px;
     margin-right: 50px;
@@ -51,84 +44,60 @@
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+
+    will-change: transform, opacity;
 }
 
 #start .flexed h3{
     opacity: 0;
+    will-change: transform, opacity;
 }
 
 #start .flexed h3 span{
     margin-left: 50px;
 }
 
-/* ظهور العناصر واحد بعد الآخر */
-#start .list-score .a0 div{
-    animation: itemIn .7s ease forwards;
-}
+/* Items animation */
+#start .list-score .a0 div{ animation: itemIn .5s ease forwards; }
+#start .list-score .a0 h3{ animation: itemIn .5s ease .25s forwards; }
 
-#start .list-score .a0 h3{
-    animation: itemIn .7s ease .4s forwards;
-}
+#start .list-score .a1 div{ animation: itemIn .5s ease .5s forwards; }
+#start .list-score .a1 h3{ animation: itemIn .5s ease .75s forwards; }
 
-#start .list-score .a1 div{
-    animation: itemIn .7s ease .8s forwards;
-}
+#start .list-score .a2 div{ animation: itemIn .5s ease 1s forwards; }
+#start .list-score .a2 h3{ animation: itemIn .5s ease 1.25s forwards; }
 
-#start .list-score .a1 h3{
-    animation: itemIn .7s ease 1.2s forwards;
-}
+#start .list-score .a3 div{ animation: itemIn .5s ease 1.5s forwards; }
+#start .list-score .a3 h3{ animation: itemIn .5s ease 1.75s forwards; }
 
-#start .list-score .a2 div{
-    animation: itemIn .7s ease 1.6s forwards;
-}
-
-#start .list-score .a2 h3{
-    animation: itemIn .7s ease 2s forwards;
-}
-
-#start .list-score .a3 div{
-    animation: itemIn .7s ease 2.4s forwards;
-}
-
-#start .list-score .a3 h3{
-    animation: itemIn .7s ease 2.8s forwards;
-}
-
-/* زر البداية */
+/* Start button */
 #start button{
     all: unset;
-
     position: relative;
     cursor: pointer;
 
-    font-size: 70px;
     margin-bottom: 50px;
+    font-size: 70px;
     font-weight: bold;
-
     color: white;
 
     animation: buttonPulse 1.4s ease-in-out infinite;
-
-    transition: .25s ease-in-out;
+    transition: transform .2s ease, color .2s ease;
+    will-change: transform;
 }
 
 #start button:hover{
-    transform: scale(1.1);
-
     color: #15ff00;
-
-    text-shadow:
-        0 0 20px #15ff00,
-        7px 7px 0px rgb(70, 70, 70);
+    transform: scale(1.08);
 
     -webkit-text-stroke: 2px black;
+    text-shadow: 7px 7px 0 rgb(70, 70, 70);
 }
 
-/* خط ضوء تحت الزر */
+/* Underline */
 #start button::after{
     content: "";
     position: absolute;
-
     left: 50%;
     bottom: -8px;
 
@@ -136,10 +105,8 @@
     height: 4px;
 
     background: #15ff00;
-    box-shadow: 0 0 15px #15ff00;
-
     transform: translateX(-50%);
-    transition: .25s ease;
+    transition: width .2s ease;
 }
 
 #start button:hover::after{
@@ -150,34 +117,24 @@
 @keyframes itemIn{
     from{
         opacity: 0;
-        transform: translateX(-40px) scale(.8);
+        transform: translate3d(-40px, 0, 0) scale(.8);
     }
 
     to{
         opacity: 1;
-        transform: translateX(0) scale(1);
+        transform: translate3d(0, 0, 0) scale(1);
     }
 }
 
 @keyframes titleDrop{
     from{
         opacity: 0;
-        transform: translateY(-60px) scale(.9);
+        transform: translate3d(0, -60px, 0) scale(.9);
     }
 
     to{
         opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-@keyframes titleGlow{
-    0%,100%{
-        filter: brightness(1);
-    }
-
-    50%{
-        filter: brightness(1.4);
+        transform: translate3d(0, 0, 0) scale(1);
     }
 }
 
@@ -187,6 +144,6 @@
     }
 
     50%{
-        transform: scale(1.06);
+        transform: scale(1.05);
     }
 }

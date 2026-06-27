@@ -1,40 +1,59 @@
 #gameOver {
-    width: 100%;
-    height: 100%;
     position: absolute;
     inset: 0;
     z-index: 100;
-    background: rgba(1, 0, 17, 0.75);
-    backdrop-filter: blur(4px);
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    background: rgba(5, 5, 20, 0.94);
+}
+
+#gameOver::before {
+    content: "";
+    position: absolute;
+    inset: -50%;
+    background-image:
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(#ff003c 1px, transparent 1px);
+    background-size: 80px 80px, 140px 140px;
+    opacity: .25;
+    animation: starsMove 20s linear infinite;
+    will-change: transform;
+}
+
+#gameOver::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 0, 60, .12);
+    animation: flash 1.8s ease-in-out infinite;
+    will-change: opacity;
+    pointer-events: none;
 }
 
 #gameOver .box {
-    width: 430px;
-    min-height: 320px;
-    padding: 35px 25px;
-    background: linear-gradient(180deg, #151122, #05030c);
+    position: relative;
+    z-index: 5;
+    width: 450px;
+    padding: 35px;
     border: 3px solid #ff003c;
-    box-shadow:
-        0 0 25px #ff003c,
-        inset 0 0 25px rgba(255, 0, 60, 0.25);
+    background: rgba(8, 5, 18, .98);
+    box-shadow: 0 0 18px rgba(255, 0, 60, .65);
     text-align: center;
-    animation: gameOverPop 0.5s ease forwards;
+    animation: popup .35s ease;
+    will-change: transform, opacity;
 }
 
 #gameOver h1 {
-    font-size: 58px;
-    font-weight: bold;
-    color: #F3E5BF;
     margin: 0 0 35px;
-    letter-spacing: 3px;
+    color: #F3E5BF;
+    font-size: 62px;
+    letter-spacing: 4px;
     -webkit-text-stroke: 2px black;
-    text-shadow:
-        4px 4px 0 red,
-        0 0 15px red;
-    animation: dangerBlink 1.5s infinite;
+    text-shadow: 4px 4px black;
+    animation: titlePulse 1.5s ease-in-out infinite;
+    will-change: transform;
 }
 
 #gameOver .button-gameover {
@@ -46,59 +65,58 @@
 #gameOver .button-gameover button {
     all: unset;
     cursor: pointer;
-    width: 80%;
-    margin-inline: auto;
-    padding: 14px 0;
+    padding: 14px;
+    font-size: 34px;
     color: white;
-    font-size: 36px;
-    text-align: center;
-    border: 2px solid transparent;
-    background: rgba(255, 255, 255, 0.06);
-    transition: 0.2s ease-in-out;
+    border: 2px solid rgba(255,255,255,.15);
+    background: rgba(255,255,255,.05);
+    transition: transform .2s, color .2s, border-color .2s;
 }
 
 #gameOver .button-gameover button:hover {
+    transform: scale(1.05);
     color: #ff003c;
     border-color: #ff003c;
-    transform: scale(1.06);
-    box-shadow: 0 0 18px rgba(255, 0, 60, 0.8);
 }
 
-#gameOver .button-gameover .b1 {
-    animation: buttonPulse 2s ease infinite;
+@keyframes starsMove {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: translate3d(0, 120px, 0);
+    }
 }
 
-#gameOver .button-gameover .b2 {
-    animation: buttonPulse 2s ease 0.7s infinite;
+@keyframes flash {
+    0%, 100% {
+        opacity: .05;
+    }
+
+    50% {
+        opacity: .18;
+    }
 }
 
-@keyframes gameOverPop {
+@keyframes popup {
     from {
         opacity: 0;
-        transform: scale(0.8) translateY(30px);
+        transform: translate3d(0, 35px, 0) scale(.85);
     }
+
     to {
         opacity: 1;
-        transform: scale(1) translateY(0);
+        transform: translate3d(0, 0, 0) scale(1);
     }
 }
 
-@keyframes dangerBlink {
+@keyframes titlePulse {
     0%, 100% {
-        text-shadow: 4px 4px 0 red, 0 0 15px red;
+        transform: scale(1);
     }
-    50% {
-        text-shadow: 4px 4px 0 red, 0 0 35px red;
-    }
-}
 
-@keyframes buttonPulse {
-    0%, 100% {
-        border-color: transparent;
-        color: white;
-    }
     50% {
-        border-color: #ff003c;
-        color: #ff003c;
+        transform: scale(1.04);
     }
 }

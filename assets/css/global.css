@@ -15,38 +15,41 @@
 
 .stars{
     position:absolute;
-    inset:-100%;
+    inset:-50%;
     background-repeat:repeat;
+    pointer-events:none;
+    will-change:transform;
+    transform:translate3d(0,0,0);
 }
 
 .stars1{
-    background-image:radial-gradient(white 1px,transparent 1px);
+    background-image:radial-gradient(white 1px, transparent 1px);
     background-size:35px 35px;
+    opacity:.85;
     animation:moveStars 8s linear infinite;
-    opacity:.9;
 }
 
 .stars2{
-    background-image:radial-gradient(#7dcfff 1px,transparent 1px);
+    background-image:radial-gradient(#7dcfff 1px, transparent 1px);
     background-size:70px 70px;
-    animation:moveStars 15s linear infinite;
-    opacity:.5;
+    opacity:.45;
+    animation:moveStars 14s linear infinite;
 }
 
 .stars3{
-    background-image:radial-gradient(white 2px,transparent 2px);
+    background-image:radial-gradient(white 2px, transparent 2px);
     background-size:120px 120px;
-    animation:moveStars 25s linear infinite;
-    opacity:.3;
+    opacity:.25;
+    animation:moveStars 22s linear infinite;
 }
 
 @keyframes moveStars{
     from{
-        transform:translateY(-50%);
+        transform:translate3d(0, -25%, 0);
     }
 
     to{
-        transform:translateY(50%);
+        transform:translate3d(0, 25%, 0);
     }
 }
 .hidden {

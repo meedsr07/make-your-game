@@ -48,6 +48,7 @@ function killPlayer(ray) {
 		G.player.lives--
 		if (G.player.lives == 0){
 			GameOver()
+			return
 		}			
 
 		G.player.element.style.display = 'none'

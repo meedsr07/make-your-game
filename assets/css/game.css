@@ -1,29 +1,28 @@
-* {
-    box-sizing: border-box;
-}
 
-body {
-    margin: 0;
-    background: radial-gradient(circle at center, #080818 0%, #000 70%);
-    min-height: 100vh;
-    overflow: hidden;
-    font-family: "Pixelify Sans", sans-serif;
-}
+
+
+
+
 
 /* ---------------- UI ---------------- */
 
 #ui {
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
+}
+
+#ui .table-res,
+#livesContainer,
+#container {
+    width: min(800px, 95vw);
 }
 
 #ui .table-res {
-    width: min(800px, 95vw);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -32,44 +31,35 @@ body {
 #ui .table-res button {
     all: unset;
     cursor: pointer;
-    background: linear-gradient(180deg, #ff003c, #8b001f);
     padding: 10px 18px;
     color: white;
     font-size: 18px;
+    background: #b0002a;
     border: 2px solid #ff5b7d;
-    box-shadow: 0 0 12px rgba(255, 0, 60, 0.6);
-    transition: 0.2s ease-in-out;
+    transition: transform 0.15s ease;
 }
 
 #ui .table-res button:hover {
-    transform: scale(1.06);
-    background: #ff003c;
-    color: black;
-    font-weight: bold;
+    transform: scale(1.05);
 }
 
 .t {
     color: white;
     font-size: 24px;
-    padding: 10px 15px;
+    padding: 8px 14px;
     border: 2px solid white;
-    border-radius: 5px;
     background: rgba(0, 0, 0, 0.65);
-    text-shadow: 0 0 8px white;
 }
 
 /* ---------------- GAME CONTAINER ---------------- */
 
 #container {
-    width: min(800px, 95vw);
     height: 600px;
     position: relative;
-    border: 2px solid white;
     overflow: hidden;
+    border: 2px solid white;
     background: rgba(0, 0, 0, 0.35);
-    box-shadow:
-        0 0 20px rgba(255, 255, 255, 0.35),
-        inset 0 0 25px rgba(255, 255, 255, 0.1);
+    contain: layout paint;
 }
 
 p {
@@ -81,7 +71,6 @@ p {
 /* ---------------- LIVES ---------------- */
 
 #livesContainer {
-    width: min(800px, 95vw);
     height: 42px;
     border: 1px solid white;
     display: flex;
@@ -104,26 +93,29 @@ p {
 /* ---------------- ENTITIES ---------------- */
 
 .brick {
-    height: 6px;
     width: 6px;
+    height: 6px;
 }
 
-.alien {
+.alien,
+#playership,
+.bullet,
+.ufo_exp,
+.crab_exp,
+.squid_exp,
+.octpus_exp,
+.player_exp {
     position: absolute;
-    width: 40px;
-    height: 40px;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
     image-rendering: pixelated;
+    will-change: transform;
 }
 
-.squid_1,
-.squid_2 {
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    filter: brightness(0) saturate(100%) invert(84%) sepia(35%) saturate(5146%) hue-rotate(140deg) brightness(101%) contrast(101%);
+.alien {
+    width: 40px;
+    height: 40px;
 }
 
 .squid_1 {
@@ -134,28 +126,12 @@ p {
     background-image: url("./../img/squid_2.png");
 }
 
-.crab_1,
-.crab_2 {
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    filter: brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(3000%) hue-rotate(260deg) brightness(100%) contrast(100%);
-}
-
 .crab_1 {
     background-image: url("./../img/crab_1.png");
 }
 
 .crab_2 {
     background-image: url("./../img/crab_2.png");
-}
-
-.octpus_1,
-.octpus_2 {
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    filter: brightness(0) saturate(100%) invert(48%) sepia(98%) saturate(1000%) hue-rotate(80deg) brightness(100%) contrast(100%);
 }
 
 .octpus_1 {
@@ -166,6 +142,7 @@ p {
     background-image: url("./../img/octpus_2.png");
 }
 
+/* استعملها فقط عند الضرورة لأنها مكلفة */
 .red {
     filter: brightness(0) saturate(100%) invert(15%) sepia(100%) saturate(7000%) hue-rotate(0deg) brightness(100%) contrast(110%);
 }
@@ -173,64 +150,39 @@ p {
 /* ---------------- PLAYER ---------------- */
 
 #playership {
-    position: absolute;
     width: 50px;
     height: 25px;
     background-image: url("./../img/player.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    image-rendering: pixelated;
 }
 
 /* ---------------- BULLET ---------------- */
 
 .bullet {
-    position: absolute;
     width: 10px;
     height: 10px;
     background-image: url("./../img/bullet_player.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    image-rendering: pixelated;
 }
 
 /* ---------------- EXPLOSIONS ---------------- */
 
 .ufo_exp {
-    position: absolute;
     width: 60px;
     height: 40px;
     background-image: url("./../img/ufo_exp.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    image-rendering: pixelated;
 }
 
 .crab_exp,
 .squid_exp,
 .octpus_exp {
-    position: absolute;
     width: 40px;
     height: 40px;
     background-image: url("./../img/exp.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    image-rendering: pixelated;
 }
 
 .player_exp {
-    position: absolute;
     width: 50px;
     height: 50px;
     background-image: url("./../img/player_exp.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    image-rendering: pixelated;
 }
 
 /* ---------------- RESPONSIVE ---------------- */
