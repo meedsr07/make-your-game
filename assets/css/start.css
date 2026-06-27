@@ -1,96 +1,192 @@
-
 #start{
+    position: relative;
+    z-index: 1;
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content:space-around;
+    justify-content: space-around;
+
     height: 100vh;
+    overflow: hidden;
 }
 
+/* عنوان اللعبة */
 #start h1{
     font-size: 120px;
     text-align: center;
-    font-weight:bold;
-    text-shadow: 7px 7px 0px rgb(138, 138, 138);
+    font-weight: bold;
     color: #15ff00;
+
     margin-top: 25px;
+
+    text-shadow:
+        0 0 12px #15ff00,
+        7px 7px 0px rgb(70, 70, 70);
+
     -webkit-text-stroke: 2px black;
+
+    animation:
+        titleDrop .8s ease forwards,
+        titleGlow 1.8s ease-in-out infinite;
 }
+
+/* قائمة النقاط */
 #start .flexed{
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-size: 45PX;
+
+    font-size: 45px;
 }
+
 #start .flexed div{
     opacity: 0;
+
     width: 80px;
     height: 80px;
     margin-right: 50px;
+
     background-size: contain;
     background-position: center;
+    background-repeat: no-repeat;
 }
+
 #start .flexed h3{
     opacity: 0;
 }
+
 #start .flexed h3 span{
-
     margin-left: 50px;
-
 }
+
+/* ظهور العناصر واحد بعد الآخر */
 #start .list-score .a0 div{
-    animation: a 1s ease forwards;
-    
-}
-#start .list-score .a0 h3{
-    animation: a 1s ease 1s forwards;
+    animation: itemIn .7s ease forwards;
 }
 
+#start .list-score .a0 h3{
+    animation: itemIn .7s ease .4s forwards;
+}
 
 #start .list-score .a1 div{
-    animation: a 1s ease 2s forwards;
-}
-#start .list-score .a1 h3{
-    animation: a 1s ease 3s forwards;
+    animation: itemIn .7s ease .8s forwards;
 }
 
+#start .list-score .a1 h3{
+    animation: itemIn .7s ease 1.2s forwards;
+}
 
 #start .list-score .a2 div{
-    animation: a 1s ease 4s forwards;
-}
-#start .list-score .a2 h3{
-    animation: a 1s ease 5s forwards;
+    animation: itemIn .7s ease 1.6s forwards;
 }
 
+#start .list-score .a2 h3{
+    animation: itemIn .7s ease 2s forwards;
+}
 
 #start .list-score .a3 div{
-    animation: a 1s ease 6s forwards;
+    animation: itemIn .7s ease 2.4s forwards;
 }
+
 #start .list-score .a3 h3{
-    animation: a 1s ease 7s forwards;
+    animation: itemIn .7s ease 2.8s forwards;
 }
+
+/* زر البداية */
 #start button{
     all: unset;
+
+    position: relative;
+    cursor: pointer;
+
     font-size: 70px;
-    margin-bottom:50px;
-    font-weight:bold;
-    transition: 0.3s ease-in-out;
+    margin-bottom: 50px;
+    font-weight: bold;
+
+    color: white;
+
+    animation: buttonPulse 1.4s ease-in-out infinite;
+
+    transition: .25s ease-in-out;
 }
+
 #start button:hover{
-    scale: 1.1;
+    transform: scale(1.1);
 
     color: #15ff00;
-    font-weight:bold;
-    text-shadow: 7px 7px 0px rgb(138, 138, 138);
+
+    text-shadow:
+        0 0 20px #15ff00,
+        7px 7px 0px rgb(70, 70, 70);
+
     -webkit-text-stroke: 2px black;
 }
 
-@keyframes a {
-    0%{
+/* خط ضوء تحت الزر */
+#start button::after{
+    content: "";
+    position: absolute;
+
+    left: 50%;
+    bottom: -8px;
+
+    width: 0;
+    height: 4px;
+
+    background: #15ff00;
+    box-shadow: 0 0 15px #15ff00;
+
+    transform: translateX(-50%);
+    transition: .25s ease;
+}
+
+#start button:hover::after{
+    width: 100%;
+}
+
+/* Animations */
+@keyframes itemIn{
+    from{
         opacity: 0;
+        transform: translateX(-40px) scale(.8);
     }
-    100%{
+
+    to{
         opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes titleDrop{
+    from{
+        opacity: 0;
+        transform: translateY(-60px) scale(.9);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes titleGlow{
+    0%,100%{
+        filter: brightness(1);
+    }
+
+    50%{
+        filter: brightness(1.4);
+    }
+}
+
+@keyframes buttonPulse{
+    0%,100%{
+        transform: scale(1);
+    }
+
+    50%{
+        transform: scale(1.06);
     }
 }

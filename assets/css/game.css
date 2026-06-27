@@ -1,237 +1,246 @@
-
-#ui{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-}
-#ui #container{
-    margin-bottom: 13%;
-}
-
-
-#ui .table-res{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-top: 10px;
-    margin-inline: 5%;
-}
-#ui .table-res button{
-    all: unset;
-    background-color: red;
-    padding: 10px;
-    color:white;
-    transition: 0.2s all ease-in-out;
-}
-#ui .table-res button:hover{
-    scale: 1.05;
-    background-color: rgb(160, 0, 0);
-}
-
-
-
-/* --------------------------------------------------------------------------------------------------------------------------------- */
-
-
-/*.violet {
-	}
-
-.green {
-   
-}
-
-.cyan {
-    }
-
-.yellow {
-   filter : brightness(0) saturate(100%) invert(90%) sepia(90%) saturate(1000%) hue-rotate(0deg) brightness(105%) contrast(105%);
-
-}
-
-.red {
-    filter: brightness(0) saturate(100%) invert(15%) sepia(100%) saturate(7000%) hue-rotate(0deg) brightness(100%) contrast(110%);
-}*/
-   
 * {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
-
-.red {
-    filter: brightness(0) saturate(100%) invert(15%) sepia(100%) saturate(7000%) hue-rotate(0deg) brightness(100%) contrast(110%);
-}
-
 
 body {
-	background-color: black;
-    min-height: 100vh;	 
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    margin: 0;
+    background: radial-gradient(circle at center, #080818 0%, #000 70%);
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: "Pixelify Sans", sans-serif;
+}
+
+/* ---------------- UI ---------------- */
+
+#ui {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#ui .table-res {
+    width: min(800px, 95vw);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#ui .table-res button {
+    all: unset;
+    cursor: pointer;
+    background: linear-gradient(180deg, #ff003c, #8b001f);
+    padding: 10px 18px;
+    color: white;
+    font-size: 18px;
+    border: 2px solid #ff5b7d;
+    box-shadow: 0 0 12px rgba(255, 0, 60, 0.6);
+    transition: 0.2s ease-in-out;
+}
+
+#ui .table-res button:hover {
+    transform: scale(1.06);
+    background: #ff003c;
+    color: black;
+    font-weight: bold;
+}
+
+.t {
+    color: white;
+    font-size: 24px;
+    padding: 10px 15px;
+    border: 2px solid white;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.65);
+    text-shadow: 0 0 8px white;
+}
+
+/* ---------------- GAME CONTAINER ---------------- */
+
+#container {
+    width: min(800px, 95vw);
+    height: 600px;
+    position: relative;
+    border: 2px solid white;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.35);
+    box-shadow:
+        0 0 20px rgba(255, 255, 255, 0.35),
+        inset 0 0 25px rgba(255, 255, 255, 0.1);
 }
 
 p {
-	position: absolute;
-
-	display: "none";
-	color: white;
-}
-
-.brick {
-	height: 6px;
-	width: 6px;
-}
-
-#container {
-	width: 800px;
-	position: relative;
-    box-sizing: border-box;
-	height: 600px;
-	border: solid;
-	border-width:1px;
-	border-color : white;
-}
-
-.squid_1 {
-	background-image: url("./../img/squid_1.png");
-	background-repeat: no-repeat;
-	filter : brightness(0) saturate(100%) invert(84%) sepia(35%) saturate(5146%) hue-rotate(140deg) brightness(101%) contrast(101%);
-	width: 40px;
-	height: 40px;
-}
-
-.squid_2 {
-	background-image: url("./../img/squid_2.png");
-	background-repeat: no-repeat;
-	filter : brightness(0) saturate(100%) invert(84%) sepia(35%) saturate(5146%) hue-rotate(140deg) brightness(101%) contrast(101%);
-	width: 40px;
-	height: 40px;
-}
-
-.crab_1 {
-	background-image: url("./../img/crab_1.png");
-	background-repeat: no-repeat;
-	filter : brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(3000%) hue-rotate(260deg) brightness(100%) contrast(100%);
-	width: 40px;
-	height: 40px;
-}
-
-.crab_2 {
-	background-image: url("./../img/crab_2.png");
-	background-repeat: no-repeat;
-	filter : brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(3000%) hue-rotate(260deg) brightness(100%) contrast(100%);
-	width: 40px;
-	height: 40px;
-}
-.octpus_1 {
-	background-image: url("./../img/octpus_1.png");
-	background-repeat: no-repeat;
-	filter : brightness(0) saturate(100%) invert(48%) sepia(98%) saturate(1000%) hue-rotate(80deg) brightness(100%) contrast(100%);
-	width: 40px;
-	height: 40px;
-}
-
-.octpus_2 {
-	background-image: url("./../img/octpus_2.png");
-	background-repeat: no-repeat; 
-	filter : brightness(0) saturate(100%) invert(48%) sepia(98%) saturate(1000%) hue-rotate(80deg) brightness(100%) contrast(100%);
-	width: 40px;
-	height: 40px;
-}
-
-
-.alien {
-	position: absolute;
-    background-repeat: no-repeat;
-    background-size: contain;
-	image-rendering: pixelated;
-
-    background-position: center;
-
-}
-#playership {
-    width: 50px;
-    height: 25px;
-    background-image: url("./../img/player.png");
-	image-rendering: pixelated;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.bullet {
-	width: 10px;
-	height: 10px; 
-	background-image:  url('./../img/bullet_player.png');
-	image-rendering:  pixelated;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-
-.ufo_exp {
-	background-image: url("./../img/ufo_exp.png") ; 
-	position: absolute;
-    background-repeat: no-repeat;
-    background-size: contain;
-	image-rendering: pixelated;
-    background-position: center;
-	width: 60px;
-	height: 40px;
-
-}
-
-.crab_exp, .squid_exp, .octpus_exp {
-	background-image: url("./../img/exp.png") ; 
-	position: absolute;
-    background-repeat: no-repeat;
-    background-size: contain;
-	image-rendering: pixelated;
-    background-position: center;
-	width: 40px;
-	height: 40px;
-
-}
-
-.player_exp {
     position: absolute;
-
-    width: 50px;
-    height: 50px;
-
-    background-image: url("./../img/player_exp.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-
-    image-rendering: pixelated;
+    display: none;
+    color: white;
 }
+
+/* ---------------- LIVES ---------------- */
 
 #livesContainer {
-    width: 800px;        
-    height: 40px;
-
+    width: min(800px, 95vw);
+    height: 42px;
     border: 1px solid white;
-
     display: flex;
     align-items: center;
     gap: 10px;
-
     padding: 5px 10px;
-    margin-bottom: 10px;
+    background: rgba(0, 0, 0, 0.45);
 }
 
 .life {
     width: 30px;
     height: 20px;
-
     background-image: url("./../img/player.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
     image-rendering: pixelated;
+}
+
+/* ---------------- ENTITIES ---------------- */
+
+.brick {
+    height: 6px;
+    width: 6px;
+}
+
+.alien {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    image-rendering: pixelated;
+}
+
+.squid_1,
+.squid_2 {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    filter: brightness(0) saturate(100%) invert(84%) sepia(35%) saturate(5146%) hue-rotate(140deg) brightness(101%) contrast(101%);
+}
+
+.squid_1 {
+    background-image: url("./../img/squid_1.png");
+}
+
+.squid_2 {
+    background-image: url("./../img/squid_2.png");
+}
+
+.crab_1,
+.crab_2 {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    filter: brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(3000%) hue-rotate(260deg) brightness(100%) contrast(100%);
+}
+
+.crab_1 {
+    background-image: url("./../img/crab_1.png");
+}
+
+.crab_2 {
+    background-image: url("./../img/crab_2.png");
+}
+
+.octpus_1,
+.octpus_2 {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    filter: brightness(0) saturate(100%) invert(48%) sepia(98%) saturate(1000%) hue-rotate(80deg) brightness(100%) contrast(100%);
+}
+
+.octpus_1 {
+    background-image: url("./../img/octpus_1.png");
+}
+
+.octpus_2 {
+    background-image: url("./../img/octpus_2.png");
+}
+
+.red {
+    filter: brightness(0) saturate(100%) invert(15%) sepia(100%) saturate(7000%) hue-rotate(0deg) brightness(100%) contrast(110%);
+}
+
+/* ---------------- PLAYER ---------------- */
+
+#playership {
+    position: absolute;
+    width: 50px;
+    height: 25px;
+    background-image: url("./../img/player.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+}
+
+/* ---------------- BULLET ---------------- */
+
+.bullet {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-image: url("./../img/bullet_player.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+}
+
+/* ---------------- EXPLOSIONS ---------------- */
+
+.ufo_exp {
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    background-image: url("./../img/ufo_exp.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    image-rendering: pixelated;
+}
+
+.crab_exp,
+.squid_exp,
+.octpus_exp {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-image: url("./../img/exp.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    image-rendering: pixelated;
+}
+
+.player_exp {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url("./../img/player_exp.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    image-rendering: pixelated;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-height: 720px) {
+    #container {
+        height: 520px;
+    }
+
+    .t {
+        font-size: 20px;
+    }
 }

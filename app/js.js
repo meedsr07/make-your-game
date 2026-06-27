@@ -3,7 +3,47 @@ let statuss = "start"
 
 
 // #start .list-score
-
+document.querySelector("#game").innerHTML = `
+        <div id="background">
+            <div class="stars stars1"></div>
+            <div class="stars stars2"></div>
+            <div class="stars stars3"></div>
+        </div>
+        <div id="start" class="showFlex">
+            <h1>space invaders</h1>
+            <div class="list-score"></div>
+            <button id="start-btn">start game</button>
+        </div>
+        <!-- UI Game -->
+        <div id="ui" class="hidden">
+            <div class="table-res">
+                <h2 class="t">500</h2>
+                    <button id="pause-btn"><i class="fa-solid fa-pause"></i></button>
+                <h2 id="time" class="t">03:56</h2>
+            </div>
+            <div id="livesContainer"></div>
+			<div id="container"></div>
+        </div>
+        <!-- Pause menu -->
+        <div id="pause-menu" class="hidden">
+            <div class="menu-game">
+                <div class="controls-menu">
+                    <button id="continue-btn">Continue</button>
+                    <button id="restart-btn">Restart</button>
+                    <button id="exit-btn">Exit</button>
+                </div>
+            </div>
+        </div>
+        <!-- Game Over -->
+        <div id="gameOver" class="hidden">
+            <div class = "box">
+                <h1>Game over</h1>
+                <div class = "button-gameover">
+                    <button id="restart-btn" class ="b1">Restart</button>
+                    <button id="exit-btn" class ="b2">Exit</button>
+                </div>
+            </div>
+        </div>`
 
 const startBtn = document.querySelector("#start-btn");
 const pauseBtn = document.querySelector("#pause-btn");
@@ -96,7 +136,7 @@ function switchs(){
             break;
 
         case "gameOver":
-            show(false, false, false, true);
+            show(false, true, false, true);
             break;
         default:
             statuss = "start";

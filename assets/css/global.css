@@ -6,13 +6,48 @@
     font-weight: bold;
 }
 #background{
-    position: absolute;
-    z-index: -1;
-    inset: 0;
-    background-image: url("./../img/background.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    background:#020111;
+    z-index:-1;
+}
+
+.stars{
+    position:absolute;
+    inset:-100%;
+    background-repeat:repeat;
+}
+
+.stars1{
+    background-image:radial-gradient(white 1px,transparent 1px);
+    background-size:35px 35px;
+    animation:moveStars 8s linear infinite;
+    opacity:.9;
+}
+
+.stars2{
+    background-image:radial-gradient(#7dcfff 1px,transparent 1px);
+    background-size:70px 70px;
+    animation:moveStars 15s linear infinite;
+    opacity:.5;
+}
+
+.stars3{
+    background-image:radial-gradient(white 2px,transparent 2px);
+    background-size:120px 120px;
+    animation:moveStars 25s linear infinite;
+    opacity:.3;
+}
+
+@keyframes moveStars{
+    from{
+        transform:translateY(-50%);
+    }
+
+    to{
+        transform:translateY(50%);
+    }
 }
 .hidden {
     display: none !important;

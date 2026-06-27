@@ -1,45 +1,104 @@
-#gameOver{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
+#gameOver {
     width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    z-index: 100;
+    background: rgba(1, 0, 17, 0.75);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.t {
-    color: white;
-    font-size: 24px;
-    padding: 10px 15px;
-    border: 2px solid white;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.5);
+#gameOver .box {
+    width: 430px;
+    min-height: 320px;
+    padding: 35px 25px;
+    background: linear-gradient(180deg, #151122, #05030c);
+    border: 3px solid #ff003c;
+    box-shadow:
+        0 0 25px #ff003c,
+        inset 0 0 25px rgba(255, 0, 60, 0.25);
+    text-align: center;
+    animation: gameOverPop 0.5s ease forwards;
 }
-#gameOver h1{
-    font-size: 100px;
-    font-weight:bold;
-    text-shadow: 7px 7px 0px rgb(255, 0, 0);
+
+#gameOver h1 {
+    font-size: 58px;
+    font-weight: bold;
     color: #F3E5BF;
-    margin-top: 25px;
+    margin: 0 0 35px;
+    letter-spacing: 3px;
     -webkit-text-stroke: 2px black;
+    text-shadow:
+        4px 4px 0 red,
+        0 0 15px red;
+    animation: dangerBlink 1.5s infinite;
 }
-#gameOver .button-gameover{
+
+#gameOver .button-gameover {
     display: flex;
     flex-direction: column;
-    gap: 25px;
-    
+    gap: 18px;
 }
-#gameOver .button-gameover button{
-        all: unset;
-        width: 80%;
-        margin-inline: 10%;
-        padding-block: 15px;
+
+#gameOver .button-gameover button {
+    all: unset;
+    cursor: pointer;
+    width: 80%;
+    margin-inline: auto;
+    padding: 14px 0;
+    color: white;
+    font-size: 36px;
+    text-align: center;
+    border: 2px solid transparent;
+    background: rgba(255, 255, 255, 0.06);
+    transition: 0.2s ease-in-out;
+}
+
+#gameOver .button-gameover button:hover {
+    color: #ff003c;
+    border-color: #ff003c;
+    transform: scale(1.06);
+    box-shadow: 0 0 18px rgba(255, 0, 60, 0.8);
+}
+
+#gameOver .button-gameover .b1 {
+    animation: buttonPulse 2s ease infinite;
+}
+
+#gameOver .button-gameover .b2 {
+    animation: buttonPulse 2s ease 0.7s infinite;
+}
+
+@keyframes gameOverPop {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes dangerBlink {
+    0%, 100% {
+        text-shadow: 4px 4px 0 red, 0 0 15px red;
+    }
+    50% {
+        text-shadow: 4px 4px 0 red, 0 0 35px red;
+    }
+}
+
+@keyframes buttonPulse {
+    0%, 100% {
+        border-color: transparent;
         color: white;
-        font-size: 50px;
-        text-align: center;
-        transition: 0.2s all ease-in-out;
-        
-        &:hover{
-            font-weight:bold;
-        }
+    }
+    50% {
+        border-color: #ff003c;
+        color: #ff003c;
+    }
 }
