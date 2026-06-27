@@ -1,6 +1,6 @@
 import { gamePlay as G } from "./app/state.js"
 import { playerExplosion } from "./app/draw.js"
-// import {drawLives} from './src/draw.js'
+import {GameOver} from "./app/js.js"
 
 
 
@@ -34,19 +34,6 @@ export function shot() {
 
 
 function killPlayer(ray) {
-// <<<<<<< HEAD
-// 		 const hit = 
-// 			    ray.x < G.player.x+6 + G.player.width-6  &&
-//    				ray.x + ray.width > G.player.x+6  &&
-// 			    ray.y < G.player.y +G.player.height &&
-// 			    ray.y + ray.height > G.player.y;
-//                     if (hit) {
-//                     ray.element.style.display = "none";// Todo later:
-// 					// alert("failed")
-//                     return
-//                 }
-	
-// =======
 	if (G.playerHit) return;
 	const hit =
 		ray.x < G.player.x + 6 + G.player.width - 6 &&
@@ -59,6 +46,9 @@ function killPlayer(ray) {
 		ray.element.remove()
 		
 		G.player.lives--
+		if (G.player.lives == 0){
+			GameOver()
+		}			
 
 		G.player.element.style.display = 'none'
 		const exp = playerExplosion(G.player.x, G.player.y);
@@ -69,8 +59,6 @@ function killPlayer(ray) {
 			G.freezeEnemies = false;
 		}, 1500);
 	}
-
-//>>>>>>> msarar
 }
 
 

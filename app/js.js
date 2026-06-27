@@ -60,6 +60,7 @@ function pause(){
     }
 }
 export function GameOver(){
+    stopLoop()
     setStatus("gameOver")
 }
 
