@@ -1,62 +1,62 @@
-*{
+* {
     margin: 0;
     padding: 0;
     color: white;
     font-family: Arial, sans-serif;
     font-weight: bold;
-}
-#background{
-    position:absolute;
-    inset:0;
-    overflow:hidden;
-    background:#020111;
-    z-index:-1;
+    box-sizing: border-box;
 }
 
-.stars{
-    position:absolute;
-    inset:-50%;
-    background-repeat:repeat;
-    pointer-events:none;
-    will-change:transform;
-    transform:translate3d(0,0,0);
+#background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: #020111;
+    z-index: -1;
 }
 
-.stars1{
-    background-image:radial-gradient(white 1px, transparent 1px);
-    background-size:35px 35px;
-    opacity:.85;
-    animation:moveStars 8s linear infinite;
+.stars {
+    position: absolute;
+    inset: -50%;
+    background-repeat: repeat;
+    pointer-events: none;
 }
 
-.stars2{
-    background-image:radial-gradient(#7dcfff 1px, transparent 1px);
-    background-size:70px 70px;
-    opacity:.45;
-    animation:moveStars 14s linear infinite;
+.stars1 {
+    background-image: radial-gradient(white 1px, transparent 1px);
+    background-size: 35px 35px;
+    opacity: .85;
+    animation: moveStars 8s linear infinite;
 }
 
-.stars3{
-    background-image:radial-gradient(white 2px, transparent 2px);
-    background-size:120px 120px;
-    opacity:.25;
-    animation:moveStars 22s linear infinite;
+.stars2 {
+    background-image: radial-gradient(#7dcfff 1px, transparent 1px);
+    background-size: 70px 70px;
+    opacity: .45;
+    animation: moveStars 14s linear infinite;
 }
 
-@keyframes moveStars{
-    from{
-        transform:translate3d(0, -25%, 0);
+.stars3 {
+    background-image: radial-gradient(white 2px, transparent 2px);
+    background-size: 120px 120px;
+    opacity: .25;
+    animation: moveStars 22s linear infinite;
+}
+
+@keyframes moveStars {
+    from {
+        transform: translateY(-25%);
     }
 
-    to{
-        transform:translate3d(0, 25%, 0);
+    to {
+        transform: translateY(25%);
     }
 }
+
 .hidden {
     display: none !important;
 }
 
-.showFlex{
+.showFlex {
     display: flex;
 }
-
