@@ -1,5 +1,4 @@
 import {stopLoop , startLoop , startGame} from "../main.js"
-//import gamePlay from "./state.js"
 let statuss = "start"
 
 
@@ -65,8 +64,8 @@ export function GameOver(){
 }
 
 function restart(){
-    reset()
     setStatus("game");
+    startGame()
 }
 
 function Exit(){

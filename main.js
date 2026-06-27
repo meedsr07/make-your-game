@@ -21,34 +21,39 @@ const timers = {
 
 
 
+
 let start = 0
 
 
 export var animationId = null
+
+function NewGame() {
+	start = 0
+	cancelAnimationFrame(animationId)
+	document.querySelector("#ui #container").innerHTML = ""
+	document.querySelector("#ui #livesContainer").innerHTML = ""
+	G.playGround= {width: 800, height: 600}
+	G.player= {}
+	G.spawnedMobs= []
+	G.freezeEnemies= false
+	G.playerHit = false
+	G.aliveMobs= 55
+	G.bricks= []
+	G.direction= 1
+	G.rays= []
+	G.shots= 0
+	G.exps= []
+    keysstate.left = false
+    keysstate.right = false 
+}
 export function startGame() {
+	NewGame()
 	G.time  = document.querySelector("#ui #time")
-	G.time.textContent = 0
-	//G.textContent = 0 
 	G.playGround.element  = document.querySelector("#ui #container")
 	G.livesContainer = document.querySelector("#ui #livesContainer")
 	spawnMobs()
 	spawnShields()
 	G.player = new Player()
-	requestAnimationFrame(gameLoop)
-}
-
-
-function pause() {
-	// add pause state 
-	cancelAnimationFram(animationId)
-	// add a counter to get paused time
-	animationId = null
-}
-
-function resume() {
-	for (let val of timers.values) {
-		val.lastTime = performance.now()
-	}
 	animationId = requestAnimationFrame(gameLoop)
 }
 
@@ -60,8 +65,10 @@ export function startLoop() {
 
 
 export function stopLoop() {
-    cancelAnimationFrame(animationId);
-    animationId = null;
+    // add pause state 
+	cancelAnimationFrame(animationId)
+	// add a counter to get paused time
+	animationId = null
 }
 
 export function gameLoop(timestamp) {
@@ -106,7 +113,8 @@ export function gameLoop(timestamp) {
 			G.shots = 0
 		}
 	}
-	G.time.textContent = ((timestamp-start) / 1000).toFixed(3)
+	
+	G.time.textContent = ((timestamp-start) / 1000).toFixed(0)
 	moveRays()
 	animationId = requestAnimationFrame(gameLoop)
 }
