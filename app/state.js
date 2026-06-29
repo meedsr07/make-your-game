@@ -12,7 +12,7 @@ export const gamePlay = {
 		rays: [],
 		shots: 0,
 		exps: [],
-		mobs : [ {name: "squid_", col: "cyan", points: 30} , {name: "crab_", col: "violet", points: 20},{name: "octpus_", col: "green", points: 10}].reverse()
+		mobs : [ {name: "squid_", col: "cyan", points: 30} , {name: "crab_", col: "violet", points: 20},{name: "octpus_", col: "green", points: 10}]
 }
 
 
