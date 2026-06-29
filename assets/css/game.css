@@ -4,6 +4,33 @@
 
 
 
+.violet {
+	filter : brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(3000%) hue-rotate(260deg) brightness(100%) contrast(100%);
+}
+
+.green {
+   	filter : brightness(0) saturate(100%) invert(48%) sepia(98%) saturate(1000%) hue-rotate(80deg) brightness(100%) contrast(100%);
+}
+
+.cyan {
+   	filter : brightness(0) saturate(100%) invert(84%) sepia(35%) saturate(5146%) hue-rotate(140deg) brightness(101%) contrast(101%); 
+}
+
+.yellow {
+   filter : brightness(0) saturate(100%) invert(90%) sepia(90%) saturate(1000%) hue-rotate(0deg) brightness(105%) contrast(105%);
+
+}
+
+
+* {
+	box-sizing: border-box;
+}
+
+.red {
+    filter: brightness(0) saturate(100%) invert(15%) sepia(100%) saturate(7000%) hue-rotate(0deg) brightness(100%) contrast(110%);
+}
+
+
 /* ---------------- UI ---------------- */
 
 #ui {
@@ -20,6 +47,11 @@
 #livesContainer,
 #container {
     width: min(800px, 95vw);
+    background-repeat: no-repeat;
+    background-size: contain;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
+    background-position: center;
 }
 
 #ui .table-res {
