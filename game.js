@@ -1,6 +1,6 @@
 import { gamePlay as G } from "./app/state.js"
 import { playerExplosion } from "./app/draw.js"
-import {GameOver} from "./app/js.js"
+import {GameOver} from "./app/switcherHTML.js"
 
 
 
