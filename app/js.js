@@ -4,13 +4,13 @@ import {gamePlay as G } from "./state.js"
 function creatListMobs(){
     let container = document.querySelector("#start .list-score")
     let c = document.createDocumentFragment()
-    let a = G.mobs.reverse()
+    let a = G.mobs
     console.log(a)
-    for (let i = 0 ; i < a-1 ; i++){
+    for (let i = 0 ; i < a.length ; i++){
         let newDiv = document.createElement("div")
         newDiv.innerHTML = `
-        <div class = "${a.name}1"></div>
-        <h3>=<span>${a.points}</span></h3>`
+        <div class = "${a[i].name}1 ${a[i].col}"></div>
+        <h3>=<span>${a[i].points}</span></h3>`
         newDiv.classList.add("flexed")
         newDiv.classList.add(`a${i}`)
         c.append(newDiv)

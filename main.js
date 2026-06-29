@@ -11,7 +11,6 @@ import {drawLives} from './app/draw.js'
 
 
 
-
 const timers = {
 	moveMobs: new Timer(800),
 	moveUfo: new Timer(50),
@@ -102,7 +101,7 @@ export function gameLoop(timestamp) {
 	}
 	if (G.aliveMobs == 0){
 		YouWin()
-		returs  =n
+		return
 	}
 
 	if (!G.freezeEnemies && timers.moveMobs.tick(timestamp)) {
@@ -138,3 +137,4 @@ function getSpeed() {
 
 	return { interval, step }
 }
+
