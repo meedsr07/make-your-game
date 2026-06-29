@@ -45,11 +45,7 @@ function killPlayer(ray) {
 		G.freezeEnemies = true;
 		ray.element.remove()
 		
-		G.player.lives--
-		if (G.player.lives == 0){
-			GameOver()
-			return
-		}			
+		G.player.lives--			
 
 		G.player.element.style.display = 'none'
 		const exp = playerExplosion(G.player.x, G.player.y);

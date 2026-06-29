@@ -1,5 +1,6 @@
 import { moveMobs, shot, moveRays, cleanExps } from "./game.js"
 import { gamePlay as G, keysstate } from "./app/state.js"
+import { YouWin , GameOver} from "./app/js.js"
 import { spawnMobs, spawnShields, spawenUfo, moveUfo } from "./app/scene.js"
 import { Player } from "./app/player.js";
 import { Bullet } from "./app/bullet.js";
@@ -46,6 +47,7 @@ function NewGame() {
     keysstate.left = false
     keysstate.right = false 
 }
+
 export function startGame() {
 	NewGame()
 	G.time  = document.querySelector("#ui #time")
@@ -94,7 +96,12 @@ export function gameLoop(timestamp) {
 		G.player.moveRight()
 	}
 	if (G.player.lives  === 0) {
-		console.log('you lose')
+		GameOver()
+		return
+	}
+	if (G.aliveMobs == 0){
+		YouWin()
+		return
 	}
 
 	if (!G.freezeEnemies && timers.moveMobs.tick(timestamp)) {

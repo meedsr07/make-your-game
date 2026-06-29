@@ -172,7 +172,6 @@ const allowedMoves = {
 
 function setStatus(newStatus) {
     if (!allowedMoves[statuss].includes(newStatus)) {
-        console.warn(`Invalid move: ${statuss} -> ${newStatus}`);
         statuss = "start";
         switchs();
         return;
