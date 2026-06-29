@@ -1,4 +1,22 @@
 import { stopLoop, startLoop, startGame } from "../main.js";
+import {gamePlay as G } from "./state.js"
+
+function creatListMobs(){
+    let container = document.querySelector("#start .list-score")
+let c = document.createDocumentFragment()
+
+for (let i = 0 ; i < G.mobs.length ; i++){
+    let newDiv = document.createElement("div")
+    newDiv.innerHTML = `
+        <div class = "${G.mobs[i].name}1"></div>
+        <h3>=<span>${G.mobs[i].points}</span></h3>`
+    newDiv.classList.add("flexed")
+    newDiv.classList.add(`a${i}`)
+    c.append(newDiv)
+}
+container.append(c)
+}
+
 
 let statuss = "start";
 
@@ -13,7 +31,7 @@ const safeExit = debounce(throttle(Exit, 500), 100);
 
 /* ---------- init ---------- */
 
-creatStart();
+creatStart()
 
 window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
@@ -26,9 +44,7 @@ window.addEventListener("keydown", (e) => {
 function creatStart() {
     game.innerHTML = `
         <div id="background">
-            <div class="stars stars1"></div>
-            <div class="stars stars2"></div>
-            <div class="stars stars3"></div>
+            <div class = "stars"></div>
         </div>
 
         <div id="start" class="showFlex">
@@ -38,15 +54,15 @@ function creatStart() {
         </div>
     `;
 
+    
+    creatListMobs()
     bindEvents();
 }
 
 function creatUi() {
     game.innerHTML = `
         <div id="background">
-            <div class="stars stars1"></div>
-            <div class="stars stars2"></div>
-            <div class="stars stars3"></div>
+            <div class = "stars"></div>
         </div>
 
         <div id="ui" class="showFlex">
@@ -76,12 +92,9 @@ function creatUi() {
 
 function creatGameOver() {
     game.innerHTML = `
-        <div id="background">
-            <div class="stars stars1"></div>
-            <div class="stars stars2"></div>
-            <div class="stars stars3"></div>
-        </div>
-
+    <div id="background">
+            <div class = "stars"></div>
+    </div>
         <div id="gameOver">
             <div class="box">
                 <h1>Game over</h1>
@@ -99,9 +112,7 @@ function creatGameOver() {
 function creatYouWin() {
     game.innerHTML = `
         <div id="background">
-            <div class="stars stars1"></div>
-            <div class="stars stars2"></div>
-            <div class="stars stars3"></div>
+            <div class = "stars"></div>
         </div>
 
         <div id="youWin">

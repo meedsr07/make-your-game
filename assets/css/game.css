@@ -106,11 +106,10 @@ p {
 .octpus_exp,
 .player_exp {
     position: absolute;
+    z-index: 10;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    image-rendering: pixelated;
-    will-change: transform;
 }
 
 .alien {
@@ -142,7 +141,6 @@ p {
     background-image: url("./../img/octpus_2.png");
 }
 
-/* استعملها فقط عند الضرورة لأنها مكلفة */
 .red {
     filter: brightness(0) saturate(100%) invert(15%) sepia(100%) saturate(7000%) hue-rotate(0deg) brightness(100%) contrast(110%);
 }
@@ -185,14 +183,3 @@ p {
     background-image: url("./../img/player_exp.png");
 }
 
-/* ---------------- RESPONSIVE ---------------- */
-
-@media (max-height: 720px) {
-    #container {
-        height: 520px;
-    }
-
-    .t {
-        font-size: 20px;
-    }
-}
