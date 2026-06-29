@@ -30,10 +30,10 @@ export class Mob {
 
     move(offset, axis, max) {
         this[axis] += offset 
-        if (this.image === 1  && (!this.specie.isUfo) ) {
+        if (this.image === 1   ) {
             this.element.classList.replace(this.specie.name+this.image, this.specie.name+2)  
             this.image = 2
-        } else  if  (!this.specie.isUfo)  {
+        } else   {
             this.element.classList.replace(this.specie.name+this.image, this.specie.name+1)  
             this.image = 1 
         }

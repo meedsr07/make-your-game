@@ -174,7 +174,10 @@ export function moveMobs(xOffset) {
 
 
 		for (let mob of row[index]) {
-
+			if (!mob.canMove(yOffset, "y", G.playGround.height)) {
+				G.player.lives = 0 
+				return
+			}
 			if (!swip) {
 				mob.move(xOffset, "x", G.playGround.width)
 			} else {

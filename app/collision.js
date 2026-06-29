@@ -1,5 +1,8 @@
 import { gamePlay as G } from "./state.js";
 
+
+
+
 export function checkBulletEnemyCollision() {
     if (G.player.bullets.length === 0) return
     for (const bullet of G.player.bullets) {
@@ -36,24 +39,7 @@ export function checkBulletEnemyCollision() {
                 }
             }
         }
-        if (G.ufo) {
-            let enemy = G.ufo
-            const hit =
-                bullet.x < enemy.x + enemy.width &&
-                bullet.x + bullet.width > enemy.x &&
-                bullet.y < enemy.y + enemy.height &&
-                bullet.y + bullet.height > enemy.y;
-            if (hit) {
-
-                bullet.element.remove();
-
-                enemy.kill();
-                G.aliveMobs--
-                G.ufo = null
-                G.bullet = null;
-            }
-
-        }
+        
 
     }
 }

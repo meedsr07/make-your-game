@@ -12,7 +12,7 @@ export function spawnMobs() {
     let line = 0
     let fragment = 	document.createDocumentFragment()
     for (let i = 0; i < G.mobs.length ; i++ ) {
-            if (G.mobs[i].isUfo) continue
+            
             let j = 2
             // a specie in the game have juts one row 
             if (i === 0) {
@@ -53,24 +53,5 @@ export function spawnShields() {
 }
 
 
-export function spawenUfo() {
-    let width = 60 
-    let height = 40
-    let  x = G.playGround.width-width
-    let y =   (height + height/2) 
-    G.ufo = new Mob(G.mobs[G.mobs.length-1], x, y) 
-    G.playGround.element.appendChild(G.ufo.element)
-    G.ufo.element.classList.add("red")
-    //console.log(G.ufo)
-}
 
-export function moveUfo() {
-    if (!G.ufo) return 
-    let offset = -5 
-    if (G.ufo.canMove(offset, "x", G.playGround.width)) {
-        G.ufo.move(offset, "x")
-    } else {
-        G.ufo.kill()
-        G.ufo = null
-    }
-}
+

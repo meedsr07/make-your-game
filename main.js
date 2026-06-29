@@ -1,7 +1,7 @@
 import { moveMobs, shot, moveRays, cleanExps } from "./game.js"
 import { gamePlay as G, keysstate } from "./app/state.js"
 import { YouWin , GameOver} from "./app/switcherHTML.js"
-import { spawnMobs, spawnShields, spawenUfo, moveUfo } from "./app/scene.js"
+import { spawnMobs, spawnShields} from "./app/scene.js"
 import { Player } from "./app/player.js";
 import { Bullet } from "./app/bullet.js";
 import { checkBulletEnemyCollision } from "./app/collision.js";
@@ -13,9 +13,7 @@ import {drawLives} from './app/draw.js'
 
 const timers = {
 	moveMobs: new Timer(800),
-	moveUfo: new Timer(50),
 	shotMob: new Timer(1500),
-	spawenUfo: new Timer((1500 + Math.random() * 1500), true)
 }
 
 
@@ -107,18 +105,9 @@ export function gameLoop(timestamp) {
 		moveMobs(step)
 	}
 	if (!G.freezeEnemies && timers.shotMob.tick(timestamp)) {
-		console.log("called")
 		shot()
 	}
-	if (!G.freezeEnemies && timers.moveUfo.tick(timestamp)) {
-		moveUfo()
-	}
-	if (!G.ufo && timers.spawenUfo.tick(timestamp)) {
-		if (G.shots >= 10) {
-			spawenUfo()
-			G.shots = 0
-		}
-	}
+	
 	
 	let min = String((((timestamp-start) / 1000).toFixed(0)/60).toFixed(0)).padStart(2,"0")
 	let sec = String(((timestamp-start) / 1000).toFixed(0)%60).padStart(2,"0")
@@ -132,7 +121,7 @@ export function gameLoop(timestamp) {
 
 
 function getSpeed() {
-	const ratio = (G.aliveMobs / 55) * 0.50
+	const ratio = (G.aliveMobs / 55) * 0.5
 
 	const interval = 100 + (700 * ratio)
 	const step = (5 + 20) //Math.floor(5 + (20 * (1 - ratio))) 
