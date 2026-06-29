@@ -121,7 +121,10 @@ export function gameLoop(timestamp) {
 		}
 	}
 	
-	G.time.textContent = ((timestamp-start) / 1000).toFixed(0)
+	let min = String((((timestamp-start) / 1000).toFixed(0)/60).toFixed(0)).padStart(2,"0")
+	let sec = String(((timestamp-start) / 1000).toFixed(0)%60).padStart(2,"0")
+	
+	G.time.textContent = min + ":"+ sec
 	G.score.textContent = G.player.score
 	moveRays()
 	animationId = requestAnimationFrame(gameLoop)
