@@ -1,7 +1,7 @@
 import { keysstate  , gamePlay as G} from "./state.js";
 
 document.addEventListener("keydown", (event) => {
-    if (event.key === ' ' &&  G.player.bullets.length === 0) {
+    if (event.key === ' ' ) {
         keysstate.bullet = true
     }
     if (event.key === "ArrowLeft") {

@@ -144,8 +144,8 @@ p {
 }
 
 .alien {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 24px;
 }
 
 .squid_1 {
@@ -187,8 +187,8 @@ p {
 /* ---------------- BULLET ---------------- */
 
 .bullet {
-    width: 10px;
-    height: 10px;
+    width: 2px;
+    height: 8px;
     background-image: url("./../img/bullet_player.png");
 }
 
@@ -199,8 +199,8 @@ p {
 .crab_exp,
 .squid_exp,
 .octpus_exp {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 24px;
     background-image: url("./../img/exp.png");
 }
 

@@ -2,9 +2,39 @@ import {gamePlay as G } from "./state.js"
 import { Timer } from "./timer.js";
 
 
+
+
+
+export class Entity {
+	constructor(x, y, element, alive = true, width = 0, height = 0) {
+		this.x = x
+		this.y = y
+		this.element = element
+		this.alive = alive
+		this.width = width
+		this.height = height
+	}
+ 
+	move(dx, dy) {
+		this.x += dx
+		this.y += dy
+		this.element.style.transform = `translate(${this.x}px, ${this.y}px)`
+	}
+ 
+	hide() {
+		this.element.style.opacity = "0"
+		this.alive = false
+	}
+    show() {
+		this.element.style.opacity = "1"
+		this.alive = true
+	}
+}
+
+
 export class Mob {
     
-    constructor(specie, x, y, width = 40, height = 40) {
+    constructor(specie, x, y, width = 48, height = 24) {
 
         // dom elment 
         let div = document.createElement("div")	
@@ -57,6 +87,4 @@ export class Mob {
         G.exps.push({element: exp, timer : new Timer(100) })
         return this.specie.points
     }
-    
-
 }

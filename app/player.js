@@ -7,7 +7,6 @@ export class Player {
         const player = document.createElement('div')
         player.id = 'playership'
         G.playGround.element.append(player)
-        this.bullets = [];
         this.score = 0
         this.width = 50
         this.height = 25
@@ -20,7 +19,9 @@ export class Player {
 
         player.style.position = "absolute";
         player.classList.add("cyan")
+        this.bullet = new Bullet(this.x - 2 + this.width / 2, this.y)
         player.style.transform = `translate(${this.x}px, ${this.y}px)`
+        this.alive = true
     }
 
     moveLeft() {
@@ -44,14 +45,14 @@ export class Player {
     }
 
     spawnBullet() {
-        const bullet = new Bullet(this.x - 2 + this.width / 2, this.y);
-        this.bullets.push(bullet);
+        if (this.bullet.alive) return
+        this.bullet.x = this.x - 2 + this.width / 2
+        this.bullet.y = this.y
+        this.bullet.show()
     }
     updateBullets() {
-        for (let bullet of this.bullets) {
-            bullet.update();
-        }
-        this.bullets = this.bullets.filter(bullet => !bullet.dead);
+        if (!this.bullet.alive) return
+        this.bullet.update();
     }
 
 }

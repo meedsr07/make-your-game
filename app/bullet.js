@@ -10,31 +10,34 @@ export class Bullet {
         this.x = x;
         this.y = y;
         this.speed = speed;
-
-        this.width = 10;
-        this.height = 10;
+        
+        this.width = 2;
+        this.height = 8;
 
         G.playGround.element.append(this.element);
-
+        this.hide()
         this.render();
     }
-
+    
     update() {
         this.y -= this.speed;
         this.render();
 
         if (this.y < 0) {
-            this.dead = true;
-            this.destroy();
+            this.hide();
         }
     }
 
     render() {
         this.element.style.transform =
-            `translate(${this.x}px, ${this.y}px)`;
+        `translate(${this.x}px, ${this.y}px)`;
     }
-
-    destroy() {
-        this.element.remove();
+    show() {
+        this.element.style.opacity = "1";
+        this.alive = true;
+    }
+    hide() {
+        this.element.style.opacity = "0";
+        this.alive = false;
     }
 }

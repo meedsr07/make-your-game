@@ -9,6 +9,7 @@ export function spawnMobs() {
     let initY = G.playGround.height / 10	
     let width = 40 
     let height = 40
+    let gap = 6 
     let line = 0
     let fragment = 	document.createDocumentFragment()
     for (let i = 0; i < G.mobs.length ; i++ ) {
@@ -22,7 +23,7 @@ export function spawnMobs() {
             let row = []
             for (let m = 0; m < 11; m++) {
 
-                let mob = new Mob(G.mobs[i], initX+(m * (width)), initY+(line * (height)  )) 
+                let mob = new Mob(G.mobs[i], initX+(m * (width+ gap)), initY+(line * (height+ gap / 2 )  )) 
                 row.push(mob)
                 fragment.appendChild(mob.element)
 

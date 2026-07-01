@@ -1,6 +1,12 @@
 import { gamePlay as G } from "./app/state.js"
+import { Bullet } from "./app/bullet.js";
+import { Player } from "./app/player.js";
+import { Mob } from "./app/mob.js";
+
 import { playerExplosion } from "./app/draw.js"
 import {GameOver} from "./app/switcherHTML.js"
+import { Entity } from "./app/mob.js"
+import { Collision } from "./app/collision.js"
 
 
 
@@ -15,116 +21,78 @@ export function shot() {
 			}
 		}
 	}
-	let ray = { height: 10, width: 10 }
-	ray.element = document.createElement("div")
-	//ray.name = "ray_"+rand(1, 3)+"_"
-	ray.element.classList.add("bullet")
-	ray.element.style.position = "absolute"
-	ray.element.classList.add("red")
-	ray.element.style.left = "0px"
-	ray.element.style.top = "0px"
+	if (!closedOne) {
+		return
+	}
+ 
+	// pull an inactive ray from the pool instead of creating a new DOM element
+	let ray = G.rays.find(r => !r.alive)
+	if (!ray) {
+		return
+	}
+ 
+	ray.show()
 	ray.x = closedOne.x + 20
 	ray.y = closedOne.y + 20
 	ray.element.style.transform = `translate(${ray.x}px, ${ray.y}px)`
-	G.rays.push(ray)
-	G.playGround.element.appendChild(ray.element)
-}	
-
-
-
-
-
-function killPlayer(ray) {
-	if (G.playerHit) return;
-	const hit =
-		ray.x < G.player.x + 6 + G.player.width - 6 &&
-		ray.x + ray.width > G.player.x + 6 &&
-		ray.y < G.player.y + G.player.height &&
-		ray.y + ray.height > G.player.y;
-	if (hit) {
-		G.playerHit = true;
-		G.freezeEnemies = true;
-		ray.element.remove()
-		
-		G.player.lives--			
-
-		G.player.element.style.display = 'none'
-		const exp = playerExplosion(G.player.x, G.player.y);
-		setTimeout(() => {
-			exp.style.display = 'none'
-			G.player.element.style.display = "block";
-			G.playerHit = false;
-			G.freezeEnemies = false;
-		}, 1500);
-	}
 }
 
 
-
-
-
-function hitShield(bullet) {
-	for (let brick of G.bricks) {
-		if (!brick.alive) continue
-		const hit =
-			bullet.x < brick.x + brick.width &&
-			bullet.x + bullet.width > brick.x &&
-			bullet.y < brick.y + brick.height &&
-			bullet.y + bullet.height > brick.y;
-		if (hit) {
-			brick.alive = false
-			brick.element.style.opacity = "0"
-			bullet.element.remove();
-			G.rays.splice(G.rays.indexOf(bullet), 1)
-			return true
-		}
-
+ 
+export function createRays() {
+	for (let i = 0; i < 6; i++) {
+		let element = document.createElement("div")
+		element.classList.add("bullet")
+		element.classList.add("red")
+		element.style.position = "absolute"
+		element.style.left = "0px"
+		element.style.top = "0px"
+ 
+		let ray = new Entity(0, 0, element, false, 2, 8)
+ 
+		G.rays.push(ray)
+		ray.hide()
+		G.playGround.element.appendChild(ray.element)
 	}
 }
+ 
+
+ 
 
 
 
-function overridShields(mob) {
-	if (!mob.alive) return
-	for (let brick of G.bricks) { // must update to handle map
 
-		if (((brick.x + 3) >= mob.x && (brick.x + 3) <= mob.x + 40) && ((brick.y + 3) >= mob.y && (brick.y + 3) <= mob.y + 32)) {
-			brick.element.remove()
-			brick.alive = false
-		}
-	}
-}
+
+
+
+
+
+
+
+
+
 
 
 export function moveRays() {
 	for (let i = 0; i < G.rays.length; i++) {
 		let ray = G.rays[i]
+		if (!ray.alive) {
+			continue
+		}
+ 
 		if (((ray.y + 20) + 4) > 600) {
-			//	destroyRay(ray, "red")
-			G.rays.splice(i, 1)
-			i--
-			ray.element.remove()
-			continue
-			//return 
-		}
-		if (hitShield(ray) || killPlayer(ray) || hitBullet(ray, i)) {
+			ray.hide()
 			continue
 		}
-		ray.y += 4
-		ray.element.style.transform = `translate(${ray.x}px, ${ray.y}px)`
+ 
+	
+ 
+		ray.move(0, 4)
 	}
 }
+ 
 
-function hitBullet(ray, i) {
-	if (!G.bullet) return
-	if (ray.y + ray.height <= G.bullet.y + G.bullet.height && ray.y + ray.height >= G.bullet.y && ray.x === G.bullet.x) {
-		G.rays.splice(i, 1)
 
-		ray.element.remove()
-		G.bullet.element.remove()
-		G.bullet = null
-	}
-}
 
 
 export function cleanExps(timestamp) {
@@ -156,11 +124,7 @@ export function moveMobs(xOffset) {
 				break outer
 
 			}
-
-			overridShields(mob)
-
 		}
-
 	}
 	if (swip) {
 		G.direction *= -1
@@ -179,7 +143,6 @@ export function moveMobs(xOffset) {
 			} else {
 				mob.move(yOffset, "y", G.playGround.height)
 			}
-			overridShields(mob)
 
 		}
 
@@ -189,4 +152,49 @@ export function moveMobs(xOffset) {
 }
 
 
-const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
+export function collisionHandler(def, inv) {
+		if (def instanceof Bullet && inv instanceof Mob) {
+				G.player.score += inv.kill()	
+				def.hide()
+				return
+		}	
+		if (def instanceof  Entity && inv instanceof Bullet) {
+				def.hide();
+				inv.hide();	
+				return
+		}
+		if (def instanceof  Entity && inv instanceof Entity) {
+				def.hide();
+				inv.hide();	
+				return
+		}
+		if (def instanceof  Bullet && inv instanceof Entity) {
+				def.hide();
+				inv.hide();	
+				return
+		}
+		if (def instanceof  Entity && inv instanceof Mob) {
+				def.hide();
+				return
+		}
+		if (def instanceof  Player && inv instanceof Entity) {
+				G.player.live--	
+				G.playerHit = true;
+				G.freezeEnemies = true;
+		
+				G.player.lives--			
+
+				G.player.element.style.display = 'none'
+				const exp = playerExplosion(G.player.x, G.player.y);
+				setTimeout(() => {
+					exp.style.display = 'none'
+					G.player.element.style.display = "block";
+					G.playerHit = false;
+					G.freezeEnemies = false;
+		}, 1500);
+				inv.hide();
+				return	
+		}
+}
+
+

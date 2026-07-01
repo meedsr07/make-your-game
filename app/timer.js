@@ -1,8 +1,7 @@
 export class Timer {
-	constructor(interval, random = false) {
+	constructor(interval) {
 		this.interval = interval; 
 		this.lastTime = null;
-		this.isRandom = random; 
 	}
 	
 	tick(timestamp) {
@@ -12,7 +11,6 @@ export class Timer {
 		}
 		if (timestamp-this.lastTime >= this.interval) {
 			this.lastTime = timestamp 
-			if (this.isRandom) this.interval = 15000 + Math.random() * 15000 
 			return true
 		}
 		
