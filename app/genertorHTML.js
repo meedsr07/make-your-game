@@ -28,7 +28,7 @@ export function creatUi() {
             <div class="table-res">
                 <h2 class="t" id="score">0</h2>
                 <button id="pause-btn"><i class="fa-solid fa-pause"></i></button>
-                <h2 id="time" class="t">03:56</h2>
+                <h2 id="time" class="t">00:00</h2>
             </div>
 
             <div id="livesContainer"></div>

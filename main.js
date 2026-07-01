@@ -22,8 +22,8 @@ const timers = {
 let start = 0
 
 
-export var animationId = null
-
+var animationId = null
+let idsetInterval = null
 function NewGame() {
 	start = 0
 	cancelAnimationFrame(animationId)
@@ -46,6 +46,7 @@ function NewGame() {
 
 export function startGame() {
 	NewGame()
+	timer()
 	G.time  = document.querySelector("#ui #time")
 	G.score  = document.getElementById("score")
 	G.playGround.element  = document.querySelector("#ui #container")
@@ -59,6 +60,7 @@ export function startGame() {
 
 export function startLoop() {
     cancelAnimationFrame(animationId);
+	timer()
     animationId = requestAnimationFrame(gameLoop);
 }
 
@@ -66,13 +68,14 @@ export function startLoop() {
 export function stopLoop() {
     // add pause state 
 	cancelAnimationFrame(animationId)
+	clearInterval(idsetInterval)
 	// add a counter to get paused time
+	idsetInterval = null
 	animationId = null
 }
 
 export function gameLoop(timestamp) {
 	const { interval, step } = getSpeed()	
-	if (!start) start = timestamp
 	timers.moveMobs.edit(interval)
 	cleanExps(timestamp)
 	
@@ -107,19 +110,23 @@ export function gameLoop(timestamp) {
 	if (!G.freezeEnemies && timers.shotMob.tick(timestamp)) {
 		shot()
 	}
-	
-	
-	let min = String((((timestamp-start) / 1000).toFixed(0)/60).toFixed(0)).padStart(2,"0")
-	let sec = String(((timestamp-start) / 1000).toFixed(0)%60).padStart(2,"0")
-	
-	G.time.textContent = min + ":"+ sec
 	G.score.textContent = G.player.score
 	moveRays()
 	animationId = requestAnimationFrame(gameLoop)
 }
 
 
-
+function timer(){
+	idsetInterval = setInterval(()=>{
+		start += 10
+		if(start%1000 == 0){
+			let min = String(((start/1000)/60).toFixed(0)).padStart(2,"0")
+			let sec = String(((start/1000)%60).toFixed(0)).padStart(2,"0")
+			G.time.textContent = min + ":"+ sec
+		}
+	},10)
+	
+}
 function getSpeed() {
 	const ratio = (G.aliveMobs / 55) * 0.5
 
