@@ -11,7 +11,7 @@ import {drawLives} from './app/draw.js'
 
 
 
-const timers = {
+export const timers = {
 	moveMobs: new Timer(800),
 	shotMob: new Timer(1500),
 }
@@ -63,7 +63,7 @@ export function startGame() {
 
 export function startLoop() {
     cancelAnimationFrame(animationId);
-	timers.shotMob.interval = performance.now()
+	timers.shotMob.lastTime = performance.now()
 	timer()
     animationId = requestAnimationFrame(gameLoop);
 }
@@ -79,7 +79,8 @@ export function stopLoop() {
 }
 
 export function gameLoop(timestamp) {
-	const { interval, step } = getSpeed()	
+	const interval = getSpeed()	
+	console.log(interval) 
 	timers.moveMobs.edit(interval)
 	cleanExps(timestamp)
 	
@@ -110,7 +111,7 @@ export function gameLoop(timestamp) {
 	}
 
 	if (!G.freezeEnemies && timers.moveMobs.tick(timestamp)) {
-		moveMobs(step)
+		moveMobs(14)
 	}
 	if (!G.freezeEnemies && timers.shotMob.tick(timestamp)) {
 		shot()
@@ -135,19 +136,19 @@ function timer(){
 
 
 function getSpeed() {
-
     const maxAlive = 55;
-    const lowThreshold = 5;
 
-    const maxInterval = 800; // slowest speed (interval in ms) when many mobs alive
-    const minInterval = 50; // fastest speed (interval in ms) when 1 mob alive - tune this!
+    const maxInterval = 800; // slowest speed when many mobs alive
+    const minInterval = 25; // fastest speed when 1 mob alive - tune this!
 
-    // normalize aliveMobs to 0-1, where 1 = maxAlive, 0 = 1 mob left
+    // normalize 0-1: 1 = maxAlive, 0 = 1 mob left
     let t = (G.aliveMobs - 1) / (maxAlive - 1);
-    t = Math.max(0, Math.min(1, t)); // clamp between 0 and 1
+    t = Math.max(0, Math.min(1, t));
 
-    const interval = minInterval + (maxInterval - minInterval) * t;
-    const step = 25;
+    // square it so speed ramps up MUCH faster as mobs get low
+    const curved = t * t;
 
-    return { interval, step };
+    const interval = minInterval + (maxInterval - minInterval) * curved;
+
+    return interval;
 }

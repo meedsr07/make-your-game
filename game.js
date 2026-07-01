@@ -6,6 +6,7 @@ import { Mob } from "./app/mob.js";
 import { playerExplosion } from "./app/draw.js"
 import {GameOver} from "./app/switcherHTML.js"
 import { Entity } from "./app/mob.js"
+import { timers } from "./main.js"
 import { Collision } from "./app/collision.js"
 
 
@@ -187,6 +188,7 @@ export function collisionHandler(def, inv) {
 				G.player.element.style.display = 'none'
 				const exp = playerExplosion(G.player.x, G.player.y);
 				setTimeout(() => {
+					timers.shotMob.lastTime = performance.now()
 					exp.style.display = 'none'
 					G.player.element.style.display = "block";
 					G.playerHit = false;
