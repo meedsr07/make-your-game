@@ -4,7 +4,7 @@ import { Mob } from "./mob.js"
 
 
 export function spawnMobs() {
-    //let offset = 2 
+   
     let initX = G.playGround.width/4 
     let initY = G.playGround.height / 10	
     let width = 40 
@@ -27,7 +27,7 @@ export function spawnMobs() {
                 fragment.appendChild(mob.element)
 
             }		
-            G.spawnedMobs.push([row, [...row].reverse()])
+            G.spawnedMobs.push([row])
 
             line++
             G.playGround.element.appendChild(fragment) 	
@@ -36,7 +36,7 @@ export function spawnMobs() {
             
     }   	
 
-    G.reversedMobs = [...G.spawnedMobs].reverse()
+   
 }
 
 

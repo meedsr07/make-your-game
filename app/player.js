@@ -54,6 +54,5 @@ export class Player {
         this.bullets = this.bullets.filter(bullet => !bullet.dead);
     }
 
-
 }
 
