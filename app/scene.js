@@ -27,7 +27,7 @@ export function spawnMobs() {
                 fragment.appendChild(mob.element)
 
             }		
-            G.spawnedMobs.push([row])
+            G.spawnedMobs.push(row)
 
             line++
             G.playGround.element.appendChild(fragment) 	

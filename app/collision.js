@@ -11,7 +11,7 @@ export function checkBulletEnemyCollision() {
         }
         // looping for the enemy arr
         for (let r = 0; r < G.spawnedMobs.length; r++) {
-            let row = G.spawnedMobs[r][0];
+            let row = G.spawnedMobs[r];
 
             for (let m = 0; m < row.length; m++) {
 

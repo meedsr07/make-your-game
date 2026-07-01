@@ -9,7 +9,7 @@ export function shot() {
 	let rev = [...G.spawnedMobs].reverse()
 	let closedOne = null
 	for (let row of rev) {
-		for (let mob of row[0]) {
+		for (let mob of row) {
 			if (mob.alive && (!closedOne || Math.abs(closedOne.x - G.player.x) > Math.abs(mob.x - G.player.x))) {
 				closedOne = mob
 			}
@@ -146,22 +146,17 @@ export function moveMobs(xOffset) {
 	//	let xOffset = ( 5* G.direction) 
 	let yOffset = 20
 	let swip = false
-	let index = 0
-	if (G.direction > 0) {
-		index = 1
-	}
+	
 	outer: for (let row of G.spawnedMobs) {
 
-
-		for (let mob of row[index]) {
-
+		for (let mob of row) {
 			if (!mob.alive) continue
 			if (!mob.canMove(xOffset, "x", G.playGround.width)) {
 				swip = true
 				break outer
 
 			}
-			break
+
 			overridShields(mob)
 
 		}
@@ -173,7 +168,7 @@ export function moveMobs(xOffset) {
 	for (let row of G.spawnedMobs) {
 
 
-		for (let mob of row[index]) {
+		for (let mob of row) {
 			if (!mob.alive) continue
 			if (!mob.canMove(yOffset, "y", G.playGround.height)) {
 				G.player.lives = 0 
