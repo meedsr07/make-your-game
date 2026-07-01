@@ -36,6 +36,7 @@
         transform:translateY(25%);
     }
 }
+
 .hidden {
     display: none !important;
 }

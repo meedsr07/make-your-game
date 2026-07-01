@@ -63,6 +63,7 @@ export function startGame() {
 
 export function startLoop() {
     cancelAnimationFrame(animationId);
+	timers.shotMob.interval = performance.now()
 	timer()
     animationId = requestAnimationFrame(gameLoop);
 }
@@ -131,12 +132,22 @@ function timer(){
 	},10)
 	
 }
+
+
 function getSpeed() {
-	const ratio = (G.aliveMobs / 55) * 0.0001
 
-	const interval = 100 + (700 * ratio)
-	const step = (5 + 20) //Math.floor(5 + (20 * (1 - ratio))) 
+    const maxAlive = 55;
+    const lowThreshold = 5;
 
-	return { interval, step }
+    const maxInterval = 800; // slowest speed (interval in ms) when many mobs alive
+    const minInterval = 50; // fastest speed (interval in ms) when 1 mob alive - tune this!
+
+    // normalize aliveMobs to 0-1, where 1 = maxAlive, 0 = 1 mob left
+    let t = (G.aliveMobs - 1) / (maxAlive - 1);
+    t = Math.max(0, Math.min(1, t)); // clamp between 0 and 1
+
+    const interval = minInterval + (maxInterval - minInterval) * t;
+    const step = 25;
+
+    return { interval, step };
 }
-
